@@ -1,8 +1,11 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { LoginService } from './../../services/login.service';
 import { User } from './../../../../../../../.history/ganapatiAngular/src/app/core/models/user.model_20200618155900';
+import { pipe } from 'rxjs';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -16,18 +19,33 @@ export class LoginComponent implements OnInit {
   submitted = false;
   loginForm: FormGroup;
   user: User = new User();
+  errorMsg: string;
+  loading = false;
 
 
   constructor(
     private fb: FormBuilder,
     private loginService: LoginService,
+    private router: Router,
 
   ) { }
 
   ngOnInit(): void {
+    this.preventReverseRoute();
     this.buildForm();
   }
 
+  preventReverseRoute() {
+
+    const token = (localStorage.getItem('token'));
+    if (token !== null) {
+      /* if (!this.jwtHelper.isTokenExpired(token)) {
+          this.router.navigateByUrl('/customer/customerlist');
+      } */
+      this.router.navigateByUrl('/customer/customerlist');
+    }
+
+  }
 
   buildForm() {
     this.loginForm = this.fb.group({
@@ -40,7 +58,7 @@ export class LoginComponent implements OnInit {
     return this.loginForm.controls;
   }
 
-  // error
+  // Msg
   getUsernameErrorMsg() {
     return this.loginForm.controls.username.hasError('required') ? 'Username is required.' : '';
   }
@@ -49,12 +67,23 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
-    console.log('calling login'+ (this.loginForm));
+    console.log('calling login' + (this.loginForm));
 
     this.submitted = true;
     if (this.loginForm.valid) {
 
-      this.loginService.getLogin(this.f.username.value, this.f.password.value);
+      this.loginService.getLogin(this.f.username.value, this.f.password.value)
+        .pipe(first())
+        .subscribe({
+          next: () => {
+            console.log('response for login');
+            this.router.navigate(['/dashboard']);
+          },
+          error: error => {
+            this.errorMsg = error.message;
+            this.loading = false;
+          }
+        });
     }
   }
 
