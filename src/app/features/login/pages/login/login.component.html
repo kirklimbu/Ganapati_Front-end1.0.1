@@ -1,31 +1,17 @@
 <div class="container-fluid">
   <div class="row">
-    <div
-      class="col-md-6 col-sm-6 col-xs-12 text-center m-auto"
-      id="login-img-container"
-    >
-      <img
-        src="assets/images/login_image.jpg"
-        alt=""
-        id="loginImage"
-        class="mx-auto mx-md-0"
-      />
+    <div class="col-md-6 col-sm-6 col-xs-12 text-center m-auto" id="login-img-container">
+      <img src="assets/images/2.jpg" alt="" id="loginImage" class="mx-auto mx-md-0" />
     </div>
 
-    <div
-        class="col-md-6 col-sm-6 col-xs-12 bg-warn"
-        id="loginForm">
-      <form
-          novalidate
-          [formGroup]="loginForm">
+    <div class="col-md-6 col-sm-6 col-xs-12 bg-warn" id="loginForm">
+      <form novalidate [formGroup]="loginForm">
         <mat-card>
           <h1 class="text-center mt-3 mb-4 h1"><b>LOGIN</b></h1>
           <div class="row">
             <div class="col-md-6 col-sm-6 mx-auto">
-              <div
-                  class="alert alert-danger text-center"
-                  role="alert">
-                    This is a danger alert—check it out!
+              <div class="alert alert-danger text-center clearfix" role="alert" *ngIf="errorMsg">
+                {{errorMsg| titlecase}}
               </div>
             </div>
           </div>
@@ -36,16 +22,12 @@
                   <mat-form-field>
                     <mat-label>Username </mat-label>
                     <mat-hint align="end">Enter username</mat-hint>
-                    <input
-                        matInput
-                        required
-                        formControlName="username" />
+                    <input matInput required formControlName="username" />
 
                     <mat-error *ngIf="loginForm.invalid">
                       {{ getUsernameErrorMsg() }}
                     </mat-error>
                   </mat-form-field>
-
                 </div>
               </div>
               <div class="row">
@@ -54,19 +36,9 @@
                     <mat-label>Password</mat-label>
                     <mat-hint align="end">Enter password</mat-hint>
 
-                    <input
-                      matInput
-                      formControlName="password"
-                      [type]="hide ? 'password' : 'text'"
-                    />
-                    <button
-                      mat-icon-button
-                      matSuffix
-                      [attr.aria-label]="'Hide password'"
-                      [attr.aria-pressed]="hide"
-                      (click)="hide = !hide"
-
-                    >
+                    <input matInput formControlName="password" [type]="hide ? 'password' : 'text'" />
+                    <button mat-icon-button matSuffix [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide"
+                      (click)="hide = !hide">
                       <mat-icon>{{
                         hide ? "visibility_off" : "visibility"
                       }}</mat-icon>
@@ -82,12 +54,8 @@
           <mat-card-actions align="start">
             <div class="row">
               <div class="col-md-6 col-sm-6 mx-auto mt-3">
-                <button
-                    type="button"
-                    class="btn btn-primary mx-auto w-100 "
-                    [disabled]="!loginForm.valid"
-                    (click)="onLogin()"
-                    >
+                <button type="button" class="btn btn-primary mx-auto w-100" [disabled]="!loginForm.valid"
+                  (click)="onLogin()">
                   Login
                 </button>
               </div>

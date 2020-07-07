@@ -1,0 +1,46 @@
+mat-sidenav {
+    width: 250px;
+    background: inherit;
+  }
+  
+  .logout-btn {
+  
+    color: red;
+    position: relative;
+  
+  
+  }
+  
+  .nav-bar-container {
+    background-color: whitesmoke;
+  }
+  
+  .nav-bar {
+    position: relative;
+    margin-left: 12%;
+    height: 5rem;
+  
+  
+    mat-icon {
+      size: 150px;
+      // padding-right: 12px;
+    }
+  }
+  
+  .mat-nav-list,
+  .mat-icon {
+    margin-right: 16px;
+    color:blue;
+  
+  
+  }
+  
+  #sidenav{
+  border-bottom: 1px red;
+  }
+  
+  .logout:hover{
+  border-bottom:red;
+  color:red;
+  }
+  
