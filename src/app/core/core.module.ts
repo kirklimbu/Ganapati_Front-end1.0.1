@@ -27,7 +27,8 @@ const DECLATATIONS: any[] = [
   imports: [
     CommonModule,
     MaterialModule,
-    RouterModule
+    RouterModule,
+    
   ],
   exports: [
     ...DECLATATIONS

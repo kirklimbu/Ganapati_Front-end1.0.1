@@ -1,1 +1,125 @@
-<p>customer works!</p>
+<div class="content-wrapper">
+  <div fxLayout fxLayout.lt-md="column wrap" fxLayoutAlign="center center" fxLayoutGap.gt-sm="250px"
+    fxLayoutGap.lt.md="20px">
+    <!-- search  -->
+
+    <div>
+      <!-- <a routerLink="/customer/add-customer" mat-stroked-button matTooltip="Add new customer " color="primar"
+      class="mt-3 mb-3">Add Customer <mat-icon align="center">person_add</mat-icon></a> -->
+      <mat-form-field class="w-25" floatLabel="never" align="end">
+        <input matInput [(ngModel)]="searchKey" placeholder="Search here..." autocomplete="off"
+          (keyup)="applyFilter()" />
+        <button mat-button mat-icon-button matSuffix aria-label="Clear" *ngIf="searchKey" (click)="clearField()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="example-container mat-elevation-z8 table-responsive">
+    <!--<div class="spinner-container" *ngIf="customerListTableDataSource==''">
+    <mat-spinner></mat-spinner>
+  </div>-->
+
+    <table mat-table [dataSource]="customerListTableDataSource" matSort class="example-full-width mb-3" hover="true">
+      <ng-container matColumnDef="sn">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Sn</th>
+        <td mat-cell *matCellDef="let element ;index as i" matTooltip="View detials">
+          {{ i+1 }}
+
+          <!-- <button mat-stroked-button routerLink="/customer-detail/id">
+          {{ element.fname }}
+        </button>-->
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="fname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>First Name</th>
+        <td mat-cell *matCellDef="let element" matTooltip="View detials">
+          {{ element.fname | titlecase}}
+
+          <!-- <button mat-stroked-button routerLink="/customer-detail/id">
+          {{ element.fname }}
+        </button>-->
+        </td>
+      </ng-container>
+
+      <!--Last Name Column -->
+      <ng-container matColumnDef="lname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.lname | titlecase}}</td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="mobile">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Mobile</th>
+        <td mat-cell *matCellDef="let element">{{ element.mobile }}</td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Address</th>
+        <td mat-cell *matCellDef="let element">{{ element.address | titlecase}}</td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="registeDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Reg Date</th>
+        <td mat-cell *matCellDef="let element">{{ element.registerDate }}</td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="updateAt">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Update At</th>
+        <td mat-cell *matCellDef="let element">{{ element.updatedAt  }}</td>
+      </ng-container>
+
+      <!-- Action Column -->
+      <!-- <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let row; index as i">
+          <button matTooltip="Edit customer details" mat-icon-button color="primary" (click)="
+            startEdit(
+              row.customerid,
+              row.fname,
+              row.lname,
+              row.address,
+              row.mobile,
+              row.updated_at
+            )
+          ">
+            <mat-icon aria-label="Edit">edit</mat-icon>
+          </button>
+          <button matTooltip="Add mortgage " mat-icon-button color="primary" (click)="createMortgage(row.customerid)">
+            <mat-icon aria-label="Add">add</mat-icon>
+          </button>
+        </td>
+      </ng-container> -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let row; index as i">
+          <ganapati-action-buttons [enableAdd] [enableEdit] [enableDelete] (add)="addMortgage(row.customerid)" 
+          (edit)="onEdit(
+          row.customerid,
+          row.fname,
+          row.lname,
+          row.address,
+          row.mobile,
+          row.updated_at
+          )"
+          (delete)="onDelete()"></ganapati-action-buttons>
+        </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns" 
+      (click)="showCustomerDetails(row.customerid)"
+        style="cursor: pointer"></tr>
+
+    </table>
+  </div>
+
+  <mat-paginator [length]="customerListTableDataSource.filteredData.length" [pageIndex]="0" [pageSize]="10"
+    [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons>
+
+  </mat-paginator>
+</div>

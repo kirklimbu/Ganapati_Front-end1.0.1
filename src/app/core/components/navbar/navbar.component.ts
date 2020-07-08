@@ -9,7 +9,7 @@ import { User } from '../../models/user.model';
 })
 export class NavbarComponent implements OnInit {
 
-  currentUser: User;
+  token: User;
 
   currentTime: any;
 
@@ -26,17 +26,17 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  fetchUser() {
+  fetchToken() {
 
-    console.log('logged user detials ' + JSON.parse(localStorage.getItem('loggedUser')));
+    console.log('logged user detials ' + JSON.parse(localStorage.getItem('token')));
 
-    this.currentUser = JSON.parse(localStorage.getItem('loggedUser'));
+    this.token = JSON.parse(localStorage.getItem('token'));
 
   }
 
   logout() {
 
-    localStorage.removeItem('loggedUser');
+    localStorage.removeItem('token');
     localStorage.removeItem('activeLink');
     // this.userDetailService.setUser(null);
     this.router.navigate(['/login']);

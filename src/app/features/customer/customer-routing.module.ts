@@ -1,3 +1,4 @@
+import { EditcustomerComponent } from './pages/editcustomer/editcustomer.component';
 import { CustomerformComponent } from './shared/customerform/customerform.component';
 import { CustomerComponent } from './pages/customer/customer.component';
 import { NgModule } from '@angular/core';
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: 'add-customer',
     component: CustomerformComponent
+  },
+  {
+    path: 'edit-customer',
+    component: EditcustomerComponent
   },
 ];
 

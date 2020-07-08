@@ -1,0 +1,21 @@
+<div class="d-flex align-items-center row">
+  <div class="ml-auto">
+    <button
+      mat-raised-button
+      (click)="save.emit()"
+      color="primary"
+      matTooltip="Save"
+    >
+      Save
+    </button>
+
+    <button
+      mat-raised-button
+      (click)="cancel.emit()"
+      color="info"
+      matTooltip="Cancel"
+    >
+      Cancel
+    </button>
+  </div>
+</div>

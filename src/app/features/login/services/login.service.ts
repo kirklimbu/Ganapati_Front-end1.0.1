@@ -26,10 +26,8 @@ export class LoginService {
     console.log('calling login service ' + username, password);
 
     return this.http
-      .post<User>(`${this.API_URL}/user/login`, { username, password })
+      .post<User>(`${this.API_URL}user/login`, { username, password })
       .pipe(map(res => {
-        console.log('after login , resp from server '+ JSON.stringify(res));
-
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('token', res.token);
       }))

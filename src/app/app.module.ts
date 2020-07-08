@@ -13,6 +13,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { SharedModule } from './shared/shared.module';
 // projectimport { AuthGuardService } from './core/guards/auth/auth-guard.service';
 import { AuthGuardService } from './core/guards/auth/auth-guard.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -20,7 +21,8 @@ export function tokenGetter() {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+
   ],
   imports: [
 
@@ -47,7 +49,8 @@ export function tokenGetter() {
     }),
   ],
   providers: [
-    
+    { provide: MatDialogRef, useValue: {} },
+    { provide: MAT_DIALOG_DATA, useValue: [] },
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
