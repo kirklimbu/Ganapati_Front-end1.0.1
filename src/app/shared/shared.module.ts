@@ -1,22 +1,57 @@
+
+import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { MaterialModule } from './material/material/material.module';
+
 import { NgModule } from '@angular/core';
+// third-party
+// import { NgxSpinnerModule } from "ngx-spinner";
+import { BreadcrumbModule } from 'angular-crumbs';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
+// project
+import { MaterialModule } from './material/material/material.module';
+import { ActionButtonsComponent } from './components/action-buttons/action-buttons.component';
+import { FormGroupComponent } from './components/form-group/form-group.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { DeletePopupComponent } from './components/delete-popup/delete-popup.component';
+import { ListPageTemplateComponent } from './components/list-page-template/list-page-template.component';
+import { PageHeaderComponent } from './components/page-header/page-header.component';
+import { TableTopBarComponent } from './components/table-top-bar/table-top-bar.component';
+import { SaveCancelButtonsComponent } from './components/save-cancel-buttons/save-cancel-buttons.component';
 
+const DECLARATIONS: any[] =
+  [
+    FormGroupComponent,
+    ActionButtonsComponent,
+    BreadcrumbComponent,
+    DeletePopupComponent,
+    ListPageTemplateComponent,
+    SaveCancelButtonsComponent,
+    TableTopBarComponent,
+    PageHeaderComponent
+
+  ]
 @NgModule({
-  declarations: [],
+  declarations: [
+    ...DECLARATIONS,
+
+  ],
   imports: [
     CommonModule,
     MaterialModule,
     NgbModule,
     FlexLayoutModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule,
+    BreadcrumbModule
+    // NgxSpinnerModule
   ],
-  exports:[
+  exports: [
     MaterialModule,
-    NgbModule
+    NgbModule,
+    BreadcrumbModule,
+    ...DECLARATIONS
   ]
 })
 export class SharedModule { }

@@ -31,21 +31,26 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.preventReverseRoute();
+
+    this.routeChange();
     this.buildForm();
   }
 
-  preventReverseRoute() {
+   routeChange() {
 
-    const token = (localStorage.getItem('token'));
-    if (token !== null) {
-      /* if (!this.jwtHelper.isTokenExpired(token)) {
-          this.router.navigateByUrl('/customer/customerlist');
-      } */
-      this.router.navigateByUrl('/customer/customerlist');
+    console.log('router change');
+    
+        const token = (localStorage.getItem('token'));
+
+        if (token !== null) {
+            /* if (!this.jwtHelper.isTokenExpired(token)) {
+                this.router.navigateByUrl('/customer/customerlist');
+            } */
+            this.router.navigateByUrl('ganapati/customer');
+
+        }
+
     }
-
-  }
 
   buildForm() {
     this.loginForm = this.fb.group({
@@ -77,7 +82,7 @@ export class LoginComponent implements OnInit {
         .subscribe({
           next: () => {
             console.log('response for login');
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/ganapati']);
           },
           error: error => {
             this.errorMsg = error.message;

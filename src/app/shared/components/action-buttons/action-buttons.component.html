@@ -1,0 +1,18 @@
+<div class="d-flex align-items-center row">
+
+  <button mat-icon-button	 (click)="onAdd()"  *ngIf="enableAdd">
+    <mat-icon color="Secondary">add</mat-icon>
+
+  </button>
+  <button mat-icon-button	 (click)="onEdit()"  *ngIf="enableEdit">
+    <mat-icon color="primary">edit</mat-icon>
+
+  </button>
+
+  <button mat-icon-button	 (click)="onDelete()"*ngIf="enableDelete">
+    <mat-icon  color="warn" >delete_outline</mat-icon>
+
+  </button>
+
+
+</div>

@@ -26,6 +26,7 @@
     "@auth0/angular-jwt": "^4.2.0",
     "@ng-bootstrap/ng-bootstrap": "^6.1.0",
     "@swimlane/ngx-charts": "^14.0.0",
+    "angular-crumbs": "^3.0.1",
     "bootstrap": "^4.4.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",

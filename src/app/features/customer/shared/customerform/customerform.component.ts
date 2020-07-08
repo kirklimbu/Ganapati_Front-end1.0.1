@@ -3,7 +3,7 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Customer } from 'src/app/core/models/customer.model';
 import { HttpClient } from '@angular/common/http';
 import { CustomerService } from '../../services/customer.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-customerform',
@@ -21,6 +21,7 @@ export class CustomerformComponent implements OnInit {
     private customerService: CustomerService,
     private formBuilder: FormBuilder,
     private router: Router,
+    private route: ActivatedRoute,
     // private toastrService: ToastrService
   ) { }
 
@@ -45,7 +46,9 @@ export class CustomerformComponent implements OnInit {
       .subscribe(
         res => {
           console.log('customer add res ' + res);
-          this.router.navigate(['customerlist'])
+          this.router.navigate(['ganapati/customer'],
+          //  { relativeTo: this.route } // for dynamic routing
+           )
         }, err => {
           console.log('error in customer add');
 
