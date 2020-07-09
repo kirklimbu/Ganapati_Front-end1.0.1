@@ -77,15 +77,21 @@ export class CustomerComponent implements OnInit {
     registerAt: Date
   ) {
 
-    console.log('inside edit modal' +customerid+ fname);
-    
+    console.log('inside edit modal' + customerid + fname);
+
     const dialogRef = this.dialog.open(EditcustomerComponent, {
       data: { customerid, fname, lname, address, mobile, registerAt },
-      // disableClose: true
+      disableClose: true,
+      width: '400px',
+      height: '500px',
+
     });
 
     dialogRef.afterClosed()
       .subscribe(result => {
+
+        console.log('result of first modal ' + (result));
+
         if (result === 1) {
           // When using an edit things are little different, firstly we find record inside DataService by id
           const foundIndex = this.customerService.dataChange.value.findIndex(

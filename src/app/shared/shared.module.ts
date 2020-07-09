@@ -8,7 +8,7 @@ import { NgModule } from '@angular/core';
 import { BreadcrumbModule } from 'angular-crumbs';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 // project
 import { MaterialModule } from './material/material/material.module';
 import { ActionButtonsComponent } from './components/action-buttons/action-buttons.component';
@@ -19,6 +19,7 @@ import { ListPageTemplateComponent } from './components/list-page-template/list-
 import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { TableTopBarComponent } from './components/table-top-bar/table-top-bar.component';
 import { SaveCancelButtonsComponent } from './components/save-cancel-buttons/save-cancel-buttons.component';
+import { TestModalComponent } from './components/test-modal/test-modal.component';
 
 const DECLARATIONS: any[] =
   [
@@ -29,7 +30,9 @@ const DECLARATIONS: any[] =
     ListPageTemplateComponent,
     SaveCancelButtonsComponent,
     TableTopBarComponent,
-    PageHeaderComponent
+    PageHeaderComponent,
+    TestModalComponent,
+
 
   ]
 @NgModule({
@@ -44,7 +47,8 @@ const DECLARATIONS: any[] =
     FlexLayoutModule,
     ReactiveFormsModule,
     RouterModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+    FormsModule
     // NgxSpinnerModule
   ],
   exports: [

@@ -1,78 +1,74 @@
-<div class="content-wrapper" >
+<div class="content-wrapper">
 
-  <section fxLayout="row wrap" fxLayoutAlign="center center" >
-    <mat-card fxFlex="500px" fxFlex.xs="100%" class="mt-4 mb-4"  >
-      <mat-card-title>Add Customer</mat-card-title>
+  <section id="customer-card" fxLayout="row wrap" fxLayoutAlign="center center">
+    <mat-card fxFlex="500px" fxFlex.xs="100%" class="mt-4 mb-4">
+      <mat-card-title class="text-center">Add Customer</mat-card-title>
       <mat-divider></mat-divider>
-      <form [formGroup]="customerForm" autocomplete="off" novalidate (ngSubmit)="createCustomer()"
-        fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
-        <mat-card-content class="mt-4">
+      <form [formGroup]="customerForm" autocomplete="off" novalidate fxLayout="column wrap"
+        fxLayoutAlign="center center" fxLayoutGap="10px">
+        <mat-card-content class="mt-4 ">
           <div class="row">
-            <div class="col-md-6 col-sm-6">
-              <mat-form-field>
-                <input matInput type="text" placeholder="First Name" formControlName="fname" id="fname" />
+            <div class="col-md-6 col-sm-6 mx-auto">
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" placeholder="First name" formControlName="fname" id="fname" />
                 <mat-hint align="end">Enter customer's first name</mat-hint>
-                <!-- <mat-error *ngIf="hasError('name', 'required')">Name is required</mat-error>
-                <mat-error *ngIf="hasError('name', 'maxlength')">You have more than 60 characters</mat-error>-->
+                <mat-error
+                *ngIf="customerForm.controls['fname'].invalid"
+                >{{ getFirstNameErrorMessage() }}</mat-error
+              >
               </mat-form-field>
-            </div>
-            <div class="col-md-6 col-sm-6">
-              <mat-form-field>
-                <input matInput type="text" placeholder="Last Name" formControlName="lname" id="lname"
-                  fxlayoutalign="column" />
-                <mat-hint align="end">Enter customer's last name</mat-hint>
-                <mat-error *ngIf="hasError('name', 'required')">Last Name is required</mat-error>
-                <mat-error *ngIf="hasError('name', 'maxlength')">Enter last name</mat-error>
-              </mat-form-field>
-            </div>
-            <div class="col-md-6 col-sm-6">
-              <mat-form-field>
-                <input matInput type="text" placeholder="address" formControlName="address" />
-                <mat-hint align="end">Enter customer's address</mat-hint>
-                <!--<mat-error *ngIf="hasError('address', 'required')">Address is required</mat-error>
-                <mat-error *ngIf="hasError('address', 'maxlength')">You have more than 100 characters</mat-error>-->
-              </mat-form-field>
-            </div>
-            <div class="col-md-6 col-sm-6">
-              <mat-form-field>
-                <input matInput type="number" placeholder="mobile number" formControlName="mobile" />
-                <mat-hint align="end">Enter customer's mobile number</mat-hint>
-                <!--<mat-error *ngIf="hasError('mobile', 'required')">Address is required</mat-error>
-                <mat-error *ngIf="hasError('mobile', 'maxlength')">You have more than 100 characters</mat-error>-->
-              </mat-form-field>
-    
             </div>
           </div>
-         
+          <div class="row">
 
-          
+            <div class=" col-md-6 col-sm-6 mx-auto">
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" placeholder="Last name" formControlName="lname" id="lname"
+                  fxlayoutalign="column" />
+                <mat-hint align="end">Enter customer's last name</mat-hint>
+                <mat-error
+                *ngIf="customerForm.controls['lname'].invalid"
+                >{{ getLastNameErrorMessage() }}</mat-error
+              >
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
 
-        
+            <div class="col-md-6 col-sm-6 mx-auto">
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" placeholder="Address" formControlName="address" />
+                <mat-hint align="end">Enter customer's address</mat-hint>
+                <mat-error
+                *ngIf="customerForm.controls['address'].invalid"
+                >{{ getAddressErrorMessage() }}</mat-error
+              >
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
 
-         
-          <!-- <mat-form-field>
-            <input matInput [matDatepicker]="picker" placeholder="Choose a registered date" formControlName="registerDate"
-                   id="registerDate"
-                   readonly (click)="picker.open()">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>-->
+            <div class="col-md-6 col-sm-6 mx-auto">
+              <mat-form-field class="example-full-width" align="center">
+                <input matInput type="number" placeholder="Mobile number" formControlName="mobile" />
+                <mat-hint align="end">Enter customer's mobile number</mat-hint>
+                <mat-error
+                *ngIf="customerForm.controls['mobile'].invalid"
+                >{{ getMobileErrorMessage() }}</mat-error
+              >
+              </mat-form-field>
 
-          <!--<mat-form-field>
-            <input matInput [matDatepicker]="picker" placeholder="Choose a updated date" formControlName="updateAt"
-                   id="updateAt"
-                   readonly (click)="picker.open()">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>-->
+            </div>
+          </div>
+
         </mat-card-content>
-        <mat-card-actions align="center">
-          <button mat-raised-button color="primary" [disabled]="!customerForm.valid">
-            Create
-          </button>
-          <button type="button" mat-raised-button color="warn" (click)="onCancel()">
-            Cancel
-          </button>
+        <mat-divider></mat-divider>
+
+        <mat-card-actions class="mr-5">
+
+          <ganapati-save-cancel-buttons (save)="onSave()" (cancel)="onCancel()">
+
+          </ganapati-save-cancel-buttons>
         </mat-card-actions>
       </form>
     </mat-card>
