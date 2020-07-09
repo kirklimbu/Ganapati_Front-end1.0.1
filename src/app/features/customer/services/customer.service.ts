@@ -15,7 +15,7 @@ export class CustomerService {
 
   // props
   API_URL = environment.apiUrl;
-  dialogData:any;
+  dialogData: any;
   dataChange: BehaviorSubject<Customer[]> = new BehaviorSubject<Customer[]>([]);
 
   constructor(
@@ -23,6 +23,9 @@ export class CustomerService {
   ) { }
 
   addCustomer(customer: Customer): any {
+
+    console.log('calling add service');
+
     return (this.http
       .post<Customer>(
         `${this.API_URL}auth/customer/create`,
@@ -49,9 +52,12 @@ export class CustomerService {
 
   // edit
   updateCustomer(customer: Customer): Observable<any> {
+
+    console.log('customer values ' + JSON.stringify(customer));
+
     return this.http
       .post(
-        `${environment.apiUrl}auth/customer/edit`,
+        `${environment.apiUrl}auth/customer/editform?customerid=${customer.customerid}`, //edit garne yo part
         customer,
         // this.httpOptions
       )

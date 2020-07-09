@@ -5,8 +5,8 @@ export class Customer {
     lname: string;
     mobile: number;
     address: string;
-    registerDate: Date;
-    updateAt: Date;
+    // registerDate: Date;
+    // updateAt: Date;
     //   mortgageCollection: Mortgage;
 
 }
