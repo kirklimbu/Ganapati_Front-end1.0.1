@@ -57,8 +57,9 @@ export class CustomerService {
 
     return this.http
       .post(
-        `${environment.apiUrl}auth/customer/editform?customerid=${customer.customerid}`, //edit garne yo part
-        customer,
+        // `${environment.apiUrl}auth/customer/editform?customerid=${customer.customerid}`, //edit garne yo part
+        `${environment.apiUrl}auth/customer/edit`, //edit garne yo part
+        { ...customer },
         // this.httpOptions
       )
       .pipe(retry(2),
@@ -69,6 +70,14 @@ export class CustomerService {
 
   getDialogData() {
     return this.dialogData;
+  }
+
+  deleteCustomer(customerId): any {
+    console.log('delete service calling..');
+    return (this.http.delete(`${this.API_URL}/trackermodel/${customerId}`)
+    )
+    // this.http.delete()
+
   }
 
 }

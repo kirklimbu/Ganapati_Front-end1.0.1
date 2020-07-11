@@ -71,56 +71,56 @@ export class EditcustomerComponent implements OnInit {
 
   buildForm() {
     this.editCustomerForm = this.fb.group({
-      fname: [this.data.fname, Validators.required],
-      lname: [this.data.lname, Validators.required],
-      mobile: [this.data.mobile, Validators.required],
-      address: [this.data.address, Validators.required]
+      fname: [this.data.fname, [Validators.required, Validators.minLength(2), Validators.maxLength(10)]],
+      lname: [this.data.lname, [Validators.required, Validators.minLength(2), Validators.maxLength(10)]],
+      mobile: [this.data.mobile, [Validators.required, Validators.pattern(("[6-9]\\d{9}"))]],
+      address: [this.data.address, [Validators.required, Validators.minLength(2), Validators.maxLength(10)]]
     });
   }
 
   onSave() {
 
     // test modal
-    const dialogRef = this.dialog.open(TestModalComponent, {
-      width: '250px',
-      data: { name: this.name, animal: this.animal },
-      disableClose: true
-
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed' + JSON.stringify(result));
-
-      if (result === 1) {
-        console.log('Yes cliceked');
-
-      } else {
-        console.log('No cliceked');
-
-      }
-    });
-  }
-  // end test modal
-
-  /* return this.customerService.updateCustomer(this.editCustomerForm.value)
-    .subscribe(data => {
-      console.log('customer update response '+ data);
-      
-      this.dialogData = data;
-      this.refreshTable();
-
-      // location.reload(true); // yesko sato table matra refresh garne banaunu perxa
-
-      // this.route.navigate(['customerlist']);
-      // this.('Successfully edited', 3000);
-    },
-      (err: HttpErrorResponse) => {
-        this.err_msg = err;
-      }
-    );
+    /*  const dialogRef = this.dialog.open(TestModalComponent, {
+       width: '250px',
+       data: { name: this.name, animal: this.animal },
+       disableClose: true
  
+     });
+ 
+     dialogRef.afterClosed().subscribe(result => {
+       console.log('The dialog was closed' + JSON.stringify(result));
+ 
+       if (result === 1) {
+         console.log('Yes cliceked');
+ 
+       } else {
+         console.log('No cliceked');
+ 
+       }
+     });
+   } */
+    // end test modal
 
-}  */
+    return this.customerService.updateCustomer(this.editCustomerForm.value)
+      .subscribe(data => {
+        console.log('customer update response ' + data);
+
+        this.dialogData = data;
+        this.refreshTable();
+
+        // location.reload(true); // yesko sato table matra refresh garne banaunu perxa
+
+        // this.route.navigate(['customerlist']);
+        // this.('Successfully edited', 3000);
+      },
+        (err: HttpErrorResponse) => {
+          this.err_msg = err;
+        }
+      );
+
+
+  }
 
 
   // error message block

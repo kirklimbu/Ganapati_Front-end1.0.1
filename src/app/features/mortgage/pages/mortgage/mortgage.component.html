@@ -1,0 +1,43 @@
+<div class="content-wrapper">
+  <div id="mortgage-card">
+    <mat-card class="mortgagedetail-card mt-4 mb-4">
+      <mat-card-header>
+        <mat-card-title>Mortgages information: </mat-card-title>
+        <mat-card-subtitle > CustomerId : {{ id }} mortgage details.
+        </mat-card-subtitle>
+      </mat-card-header>
+      <!--  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">-->
+      <mat-card-content>
+        <mat-list>
+          <h3 mat-subheader>Details:</h3>
+          <mat-list-item *ngFor="let mortgage of mortgages">
+            <mat-icon mat-list-icon>details</mat-icon>
+            <!--<div>
+          <a
+            [routerLink]="['/createmortgagedetail']"
+            mat-stroked-button
+            color="primar"
+            class="mt-3 mb-3"
+          >Add Mortgage Detail: <mat-icon align="center">add</mat-icon></a
+          >
+        </div>    -->
+            <h4 mat-line>Mortgage id: {{ mortgage.fakeMortId }}</h4>
+            <h4 mat-line>Amount: {{ mortgage.amount }}</h4>
+            <h4 mat-line>
+              Nepali Date of Transaction: {{ mortgage.nepDate | date }}
+            </h4>
+            <mat-divider></mat-divider>
+          </mat-list-item>
+          <!-- <mat-divider></mat-divider> -->
+        </mat-list>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button (click)="goToList()">
+          <mat-icon aria-label="arrow back" color="primary"
+            >arrow_back</mat-icon
+          >
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

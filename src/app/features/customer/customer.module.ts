@@ -1,3 +1,4 @@
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -25,7 +26,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
     ReactiveFormsModule,
     HttpClientModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    MatTooltipModule
   ],
 
   providers: [
