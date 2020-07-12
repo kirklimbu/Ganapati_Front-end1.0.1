@@ -36,7 +36,7 @@
       <ng-container matColumnDef="fname">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Full Name</th>
         <td mat-cell *matCellDef="let element" onmouseover="this.style.color='red'"
-            onmouseout="this.style.color='black'" style="cursor: pointer" matTooltip="View Mortgage detials."
+            onmouseout="this.style.color='black'" style="cursor: pointer" matTooltip="Show more mortgage information."
             (click)="showCustomerDetails(element.customerid)">
           {{ element.fname | titlecase}}
           {{ element.lname | titlecase}}

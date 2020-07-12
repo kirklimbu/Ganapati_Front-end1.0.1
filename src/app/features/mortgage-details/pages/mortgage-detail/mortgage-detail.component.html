@@ -1,0 +1,44 @@
+<div class="content-wrapper">
+  <mat-card class="mortgagedetail-card mt-4 mb-4">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Mortgage details collection: </mat-card-title>
+      <mat-card-subtitle>Below are the lists of mortgages: </mat-card-subtitle>
+    </mat-card-header>
+    <!--  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">-->
+    <mat-card-content>
+      <mat-list>
+        <h3 mat-subheader>Detials:</h3>
+        <mat-list-item *ngFor="let mortgagedetail of mortgageDetails">
+          <mat-icon mat-list-icon>details</mat-icon>
+          <!--<div>
+            <a
+              [routerLink]="['/createmortgagedetail']"
+              mat-stroked-button
+              color="primar"
+              class="mt-3 mb-3"
+            >Add Mortgage Detail: <mat-icon align="center">add</mat-icon></a
+            >
+          </div>    -->
+          <h4 mat-line>Mortgage detail id: {{ mortgagedetail.mortDetId }}</h4>
+          <h4 mat-line>Amount: {{ mortgagedetail.amount }}</h4>
+          <h4 mat-line>Days: {{ mortgagedetail.day }}</h4>
+          <h4 mat-line>Status: {{ mortgagedetail.status }}</h4>
+          <h4 mat-line>
+            Nepali Date of Transaction: {{ mortgagedetail.nepDate }}
+          </h4>
+          <h4 mat-line>
+            English Date of Transaction: {{ mortgagedetail.engDate | date }}
+          </h4>
+        </mat-list-item>
+        <hr />
+        <mat-divider></mat-divider>
+      </mat-list>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="goToList()">
+        <mat-icon aria-label="arrow back" color="primary">arrow_back</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

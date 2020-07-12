@@ -1,0 +1,106 @@
+<div class="content-wrapper">
+  <section fxLayout="row wrap" fxLayoutAlign="center center">
+    <mat-card
+      fxFlex="500px"
+      fxFlex.xs="100%"
+      class="mortgagedetail-form-card mt-4"
+    >
+      <mat-card-title align="center"
+        >Add mortgagedetails for mortgage_id: {{ mortgageId }}</mat-card-title
+      >
+
+      <mat-divider></mat-divider>
+      <form
+        [formGroup]="motrgageDetailForm"
+        autocomplete="off"
+        novalidate
+        fxLayout="column wrap"
+        fxLayoutAlign="center center"
+        fxLayoutGap="10px"
+      >
+        <!-- amount -->
+        <mat-card-content>
+          <div class="row">
+            <div class="col-md-6 col-sm-6 mx-auto mt-4 mb-4">
+              <mat-form-field class="example-full-width">
+                <input
+                  matInput
+                  type="number"
+                  placeholder="Amount"
+                  formControlName="amount"
+                  id="amount"
+                />
+                <mat-hint align="end">Enter amount paid to customer.</mat-hint>
+                <!-- <mat-error *ngIf="hasError('quantity', 'required')">Quantity is required</mat-error>
+             <mat-error *ngIf="hasError('quantity', 'maxlength')">You have more than 25 characters</mat-error>-->
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- status -->
+          <div class="row">
+            <div class="col-md-6 col-sm-6 mx-auto">
+              <mat-form-field class="example-full-width">
+                <mat-label>Select staus</mat-label>
+                <mat-select [(value)]="selected">
+                  <mat-option value="option1">paid</mat-option>
+                  <mat-option value="option2">recieved</mat-option>
+                </mat-select>
+                <mat-hint align="end"></mat-hint>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- rate of interest -->
+          <div class="row">
+            <div class="col-md-6 col-sm-6 mx-auto">
+              <mat-form-field class="example-full-width">
+                <input
+                  matInput
+                  type="number"
+                  placeholder="Rate of interest"
+                  formControlName="rate"
+                  id="rate"
+                />
+                <mat-hint align="end">Amount given to the client</mat-hint>
+                <!--        <mat-error *ngIf="hasError('address', 'required')">Address is required</mat-error>-->
+                <!--          <mat-error *ngIf="hasError('address', 'maxlength')">You have more than 100 characters</mat-error>-->
+              </mat-form-field>
+            </div>
+          </div>
+
+
+          <!-- date -->
+          <div class="row">
+            <div class="col-md-6 col-sm-6 mx-auto">
+              <mat-form-field class="example-full-width">
+                <!-- <mat-label>Angular forms (w/ deserialization)</mat-label> -->
+                <input
+                  matInput
+                  [matDatepicker]="picker2"
+                  [formControl]="serializedDate"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker2"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+
+        </mat-card-content>
+        <div class="row">
+          <div class="col-md-9 col-sm-6">
+            <mat-card-actions align="center">
+              <ganapati-save-cancel-buttons
+                (save)="createMortgageDetail(mortgageId, rate)"
+                (cancel)="onCancel()"
+              ></ganapati-save-cancel-buttons>
+            </mat-card-actions>
+          </div>
+        </div>
+      </form>
+    </mat-card>
+  </section>
+</div>

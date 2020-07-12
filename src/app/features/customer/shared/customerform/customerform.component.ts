@@ -60,7 +60,6 @@ export class CustomerformComponent implements OnInit {
 
   }
 
-  // error
   // error message block
   getFirstNameErrorMessage() {
     return this.customerForm.controls['fname'].hasError('required') ? 'Customer first name is required.' :

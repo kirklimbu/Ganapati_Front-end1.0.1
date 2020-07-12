@@ -13,7 +13,18 @@ export class MortgageService {
   constructor(private http: HttpClient) {}
 
   addMortgage(id: number, mortgage: any): any {
-    console.log('calling add mortgage service');
+    console.log(
+      'calling add mortgage service' + id + ' ' + JSON.stringify(mortgage)
+    );
+    return this.http
+      .post(`${this.API_URL}auth/customer/mortgage/create?customerId=${id}`, {
+        ...mortgage,
+      })
+      .pipe(
+        catchError((err) => {
+          return Observable.throw(err);
+        })
+      );
   }
 
   getMortgageList(id): any {
@@ -27,4 +38,6 @@ export class MortgageService {
         })
       );
   }
+
+  
 }

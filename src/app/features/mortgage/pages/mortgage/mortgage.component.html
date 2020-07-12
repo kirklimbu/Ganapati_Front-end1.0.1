@@ -3,15 +3,22 @@
     <mat-card class="mortgagedetail-card mt-4 mb-4">
       <mat-card-header>
         <mat-card-title>Mortgages information: </mat-card-title>
-        <mat-card-subtitle > CustomerId : {{ id }} mortgage details.
+        <mat-card-subtitle>
+          CustomerId : {{ id }} mortgage details.
         </mat-card-subtitle>
       </mat-card-header>
       <!--  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">-->
       <mat-card-content>
         <mat-list>
           <h3 mat-subheader>Details:</h3>
-          <mat-list-item *ngFor="let mortgage of mortgages">
-            <mat-icon mat-list-icon>details</mat-icon>
+          <mat-list-item *ngFor="let mortgage of mortgages; index as i">
+           <!--  <button mat-mini-fab disabled aria-label="Example icon button with a home icon">
+              <mat-icon class="m-auto">add</mat-icon>
+            </button> -->
+           {{i+1}}.  <mat-icon mat-list-icon matTooltip="Add mortage details"
+           (click)="onAdd(mortgage.mortgageId)"
+           >add</mat-icon
+         >
             <!--<div>
           <a
             [routerLink]="['/createmortgagedetail']"
