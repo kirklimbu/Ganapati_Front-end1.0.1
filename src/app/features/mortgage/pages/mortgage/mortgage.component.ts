@@ -34,10 +34,18 @@ export class MortgageComponent implements OnInit {
     });
   }
 
-  fetchCustomerDetail(){
+  fetchCustomerDetail() {
     // get customer by id and show details
   }
   goToList() {
     this.router.navigate(['/mortgage-detail']);
+  }
+
+  onAdd(id: number) {
+    console.log('on add called ' +JSON.stringify(id));
+
+    this.router.navigate(['/ganapati/mortgage-detail/add-mortgage-details'], {
+      queryParams: { mortgageId: id },
+    });
   }
 }

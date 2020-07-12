@@ -43,9 +43,8 @@ export class CustomerComponent implements OnInit {
     private http: HttpClient,
     public dialog: MatDialog,
     private router: Router,
-    private route: ActivatedRoute
-  ) // private toastrService: ToastrService
-  // private spinner:NgxspinnerService
+    private route: ActivatedRoute // private toastrService: ToastrService
+  ) // private spinner:NgxspinnerService
 
   {}
 
@@ -109,11 +108,11 @@ export class CustomerComponent implements OnInit {
   }
 
   addMortgage(customerId: number) {
-    const link: any = 'mortgage/add-mortgage/';
-    this.router.navigate([link], {
-      relativeTo: this.route,
+    // const link: any = 'mortgage/add-mortgage/';
+    this.router.navigate(['/ganapati/mortgage/add-mortgage'], {
       queryParams: { customerid: customerId },
     });
+
     // this.toastrService.success('wel-come to create new mortgage page')
   }
 
