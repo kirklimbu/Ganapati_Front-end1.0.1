@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { MortgageRoutingModule } from './mortgage-routing.module';
 import { MortgageComponent } from './pages/mortgage/mortgage.component';
 import { MortgageFormComponent } from './shared/mortgage-form/mortgage-form.component';
-
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [MortgageComponent, MortgageFormComponent],
@@ -16,7 +16,8 @@ import { MortgageFormComponent } from './shared/mortgage-form/mortgage-form.comp
     MortgageRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
-    SharedModule
-  ]
+    SharedModule,
+    MatTooltipModule,
+  ],
 })
-export class MortgageModule { }
+export class MortgageModule {}

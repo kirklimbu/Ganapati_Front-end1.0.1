@@ -7,6 +7,8 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MortgageDetailService } from '../../services/mortgage-detail.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { Customer } from 'src/app/core/models/customer.model';
 
 @Component({
   selector: 'app-mortgage-detail-form',
@@ -14,7 +16,6 @@ import { MortgageDetailService } from '../../services/mortgage-detail.service';
   styleUrls: ['./mortgage-detail-form.component.scss'],
 })
 export class MortgageDetailFormComponent implements OnInit {
-
   // props
   motrgageDetailForm: FormGroup;
   mortgageId: number;
@@ -31,15 +32,20 @@ export class MortgageDetailFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.toastrService.success('wel-come to create new mortgage-details page');
+    this.getQueryParamValue();
+    this.buidMortgageDetailForm();
+  }
 
-    const id = +this.route.snapshot.paramMap.get('id');
-    console.log('mortgageId from server ' + id);
-    this.mortgageId = id;
+  getQueryParamValue() {
+    this.route.queryParams.subscribe((params) => {
+      this.mortgageId = +params.mortgageId;
+      console.log('mortgageId from server ' + this.mortgageId);
+    });
+  }
 
+  buidMortgageDetailForm() {  // START FROM HERE 2077/04/01 THURSDAY --> not able to set rate of interest
     this.motrgageDetailForm = this.fb.group({
       amount: ['', Validators.required],
-      // day: ['', Validators.required],
       nepDate: [''],
       status: [''],
       rate: ['', Validators.required],
@@ -49,22 +55,15 @@ export class MortgageDetailFormComponent implements OnInit {
   onCancel() {}
 
   createMortgageDetail(id, rate) {
-    this.mortgageId = id;
     this.rate = rate;
+    id = this.mortgageId;
+console.log('rate & mId: '+ rate + this.mortgageId);
 
     /* const rate = this.motrgageDetailForm.patchValue({
     })*/
-    console.log(
-      'id & rate inside createMortgageDetail ' + this.mortgageId,
-      this.rate
-    );
 
     this.mortgageDetailsService
-      .createNewMortgageDetail(
-        this.mortgageId,
-        this.rate,
-        this.motrgageDetailForm.value
-      )
+      .createNewMortgageDetail(id, this.rate, this.motrgageDetailForm.value)
       .subscribe(
         (response) => {
           console.log('successful entry of mortgage detail ' + response);
