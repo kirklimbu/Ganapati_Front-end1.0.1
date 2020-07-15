@@ -12,13 +12,17 @@
         <mat-list>
           <h3 mat-subheader>Details:</h3>
           <mat-list-item *ngFor="let mortgage of mortgages; index as i">
-           <!--  <button mat-mini-fab disabled aria-label="Example icon button with a home icon">
+            <!--  <button mat-mini-fab disabled aria-label="Example icon button with a home icon">
               <mat-icon class="m-auto">add</mat-icon>
             </button> -->
-           {{i+1}}.  <mat-icon mat-list-icon matTooltip="Add mortage details"
-           (click)="onAdd(mortgage.mortgageId)"
-           >add</mat-icon
-         >
+            {{ i + 1 }}.
+            <mat-icon
+              mat-list-icon
+              matTooltip="Add mortage details"
+              style="cursor: copy; color: coral;"
+              (click)="onAdd(mortgage.mortgageId)"
+              >add</mat-icon
+            >
             <!--<div>
           <a
             [routerLink]="['/createmortgagedetail']"
@@ -28,7 +32,16 @@
           >Add Mortgage Detail: <mat-icon align="center">add</mat-icon></a
           >
         </div>    -->
-            <h4 mat-line>Mortgage id: {{ mortgage.fakeMortId }}</h4>
+            <h4
+              mat-line
+              style="cursor: pointer;"
+              onmouseover="this.style.color ='red'"
+              onMouseOut="this.style.color='black'"
+              matTooltip="Show more mortgage detail information."
+              (click)="showDetails(mortgage.mortgageId,id)"
+            >
+              Mortgage id: {{ mortgage.fakeMortId }}
+            </h4>
             <h4 mat-line>Amount: {{ mortgage.amount }}</h4>
             <h4 mat-line>
               Nepali Date of Transaction: {{ mortgage.nepDate | date }}

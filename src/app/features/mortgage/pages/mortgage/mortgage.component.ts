@@ -30,7 +30,14 @@ export class MortgageComponent implements OnInit {
       this.id = +params.customerid;
     });
     this.mortgageService.getMortgageList(this.id).subscribe((data) => {
+      console.log('mortgage data ' + JSON.stringify(data));
+
       this.mortgages = data;
+
+      console.log(
+        'mortgage inner data ' +
+          JSON.stringify(data[0].mortgageDetailsCollection[0].status)
+      );
     });
   }
 
@@ -42,10 +49,20 @@ export class MortgageComponent implements OnInit {
   }
 
   onAdd(id: number) {
-    console.log('on add called ' +JSON.stringify(id));
 
     this.router.navigate(['/ganapati/mortgage-detail/add-mortgage-details'], {
       queryParams: { mortgageId: id },
+    });
+  }
+
+  showDetails(mortgageId: number, customerId?: number) {
+    customerId = this.id;
+    this.router.navigate([`/ganapati/mortgage-detail/`], {
+      // sending multiple values in query
+      queryParams: {
+        mortgageId: mortgageId,
+        customerid: customerId,
+      },
     });
   }
 }

@@ -40,13 +40,10 @@ export class CustomerComponent implements OnInit {
 
   constructor(
     private customerService: CustomerService,
-    private http: HttpClient,
     public dialog: MatDialog,
     private router: Router,
-    private route: ActivatedRoute // private toastrService: ToastrService
-  ) // private spinner:NgxspinnerService
-
-  {}
+    private route: ActivatedRoute // private toastrService: ToastrService // private spinner:NgxspinnerService
+  ) {}
 
   ngOnInit() {
     this.fetchCustomers();
@@ -56,6 +53,7 @@ export class CustomerComponent implements OnInit {
     this.customerService.getCustomers().subscribe(
       (data) => {
         // this.toastrService.success('wel-come to customerlist page')
+        console.log('customer list ' + JSON.stringify(data));
 
         this.customerListTableDataSource = new MatTableDataSource(data);
         this.customerListTableDataSource.paginator = this.paginator;
@@ -108,7 +106,6 @@ export class CustomerComponent implements OnInit {
   }
 
   addMortgage(customerId: number) {
-    // const link: any = 'mortgage/add-mortgage/';
     this.router.navigate(['/ganapati/mortgage/add-mortgage'], {
       queryParams: { customerid: customerId },
     });
@@ -118,12 +115,10 @@ export class CustomerComponent implements OnInit {
 
   showCustomerDetails(customerId: number) {
     console.log('show data ' + JSON.stringify(customerId));
-    // const link: any = '/ganapati/mortgage/'
     this.router.navigate(['/ganapati/mortgage'], {
       queryParams: { customerid: customerId },
     });
 
-    // this.router.navigate(['/ganapati/mortgage/'], {relativeTo: this.route, queryParams: {customerid: customerId}});
   }
 
   clearField() {

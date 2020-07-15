@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { env } from 'process';
 import { environment } from 'src/environments/environment';
 import { retry, catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -16,11 +15,10 @@ export class MortgageDetailService {
   getMortgageDetailPage(id: number): any {}
 
   getMortgageDetail(id: number): any {
+    console.log('passed if' + id);
+
     return this.http
-      .post(
-        `${environment.apiUrl}/auth/customer/mortgagedetail?mortgageId=`,
-        id
-      )
+      .get(`${environment.apiUrl}auth/customer/mortgagedetail?mortgageId=${id}`)
       .pipe(
         retry(2),
         catchError((err) => {
@@ -29,26 +27,42 @@ export class MortgageDetailService {
       );
   }
 
-  createNewMortgageDetail(
-    mortgageId: number,
-    rate: number,
-    body
-  ): Observable<any> {
-    console.log(' paramVal= ' + mortgageId, body);
+  createNewMortgageDetail(mortgageId: number, rate: number, body): any {
+    /* console.log(' paramVal= ' + mortgageId, body);
     const params = new HttpParams()
       .set('mortgageId', String(mortgageId))
-      .set('rate', String(body.rate));
+      .set('rate', String(body.rate)); */
 
-    console.log('inside params ' + params);
+    // console.log('inside params ' );
     // this.params2 = parseFloat(params);
-    return this.http
+    /*  return this.http
       .post(
-        `${environment.apiUrl}/auth/customer/mortgagedetail/create/` +
+        `${environment.apiUrl}auth/customer/mortgagedetail/create/` +
           mortgageId +
           '/' +
           body.rate,
         body
         // this.httpOptions
+      )
+      .pipe(
+        retry(2),
+        catchError((err) => {
+          return Observable.throw(err);
+        })
+      ); */
+
+    // new code
+    console.log(
+      'calling create mortggae detail servive ' +
+        mortgageId +
+        rate +
+        JSON.stringify(body)
+    );
+
+    return this.http
+      .post(
+        `${this.API_URL}auth/customer/mortgagedetail/create?mortgageId=${mortgageId}?rate=${rate}`,
+        { ...body }
       )
       .pipe(
         retry(2),
