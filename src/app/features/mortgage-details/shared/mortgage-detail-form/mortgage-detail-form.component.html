@@ -42,9 +42,9 @@
             <div class="col-md-6 col-sm-6 mx-auto">
               <mat-form-field class="example-full-width">
                 <mat-label>Select staus</mat-label>
-                <mat-select [value]="selected">
-                  <mat-option value="option1">paid</mat-option>
-                  <mat-option value="option2">recieved</mat-option>
+                <mat-select formControlName="status">
+                  <mat-option value="P">paid</mat-option>
+                  <mat-option value="R">recieved</mat-option>
                 </mat-select>
                 <mat-hint align="end"></mat-hint>
               </mat-form-field>
@@ -56,11 +56,13 @@
             <div class="col-md-6 col-sm-6 mx-auto">
               <mat-form-field class="example-full-width">
                 <input
+
                   matInput
                   type="number"
                   placeholder="Rate of interest"
                   formControlName="rate"
                   id="rate"
+                  required
                 />
                 <mat-hint align="end">Amount given to the client</mat-hint>
                 <!--        <mat-error *ngIf="hasError('address', 'required')">Address is required</mat-error>-->
@@ -78,6 +80,7 @@
                   matInput
                   [matDatepicker]="picker2"
                   [formControl]="serializedDate"
+                  formControlName="nepDate"
                 />
                 <mat-datepicker-toggle
                   matSuffix

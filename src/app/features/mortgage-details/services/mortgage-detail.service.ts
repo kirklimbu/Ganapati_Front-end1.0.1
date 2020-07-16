@@ -28,20 +28,17 @@ export class MortgageDetailService {
   }
 
   createNewMortgageDetail(mortgageId: number, rate: number, body): any {
-    /* console.log(' paramVal= ' + mortgageId, body);
+    console.log(' paramVal= ' + mortgageId, body);
     const params = new HttpParams()
       .set('mortgageId', String(mortgageId))
-      .set('rate', String(body.rate)); */
+      .set('rate', String(body.rate));
 
-    // console.log('inside params ' );
+    console.log('inside params ');
     // this.params2 = parseFloat(params);
-    /*  return this.http
+    return this.http
       .post(
-        `${environment.apiUrl}auth/customer/mortgagedetail/create/` +
-          mortgageId +
-          '/' +
-          body.rate,
-        body
+        `${this.API_URL}auth/customer/mortgagedetail/create?mortgageId=${mortgageId}&rate=${body.rate}`,
+        { ...body }
         // this.httpOptions
       )
       .pipe(
@@ -49,10 +46,10 @@ export class MortgageDetailService {
         catchError((err) => {
           return Observable.throw(err);
         })
-      ); */
+      );
 
     // new code
-    console.log(
+    /* console.log(
       'calling create mortggae detail servive ' +
         mortgageId +
         rate +
@@ -69,6 +66,6 @@ export class MortgageDetailService {
         catchError((err) => {
           return Observable.throw(err);
         })
-      );
+      ); */
   }
 }

@@ -48,10 +48,9 @@ export class MortgageComponent implements OnInit {
     this.router.navigate(['/mortgage-detail']);
   }
 
-  onAdd(id: number) {
-
+  onAdd(id: number, customerId?) {
     this.router.navigate(['/ganapati/mortgage-detail/add-mortgage-details'], {
-      queryParams: { mortgageId: id },
+      queryParams: { mortgageId: id, customerId: customerId },
     });
   }
 
