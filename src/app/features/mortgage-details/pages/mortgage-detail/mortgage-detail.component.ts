@@ -20,7 +20,7 @@ export class MortgageDetailComponent implements OnInit {
   // test table
   mortgages: any;
   mortgageDetails: MatTableDataSource<any> = new MatTableDataSource();
-  displayedColumns: string[] = ['date', 'status', 'days', 'amount', 'action'];
+  displayedColumns: string[] = ['sn','date', 'status', 'days', 'amount', 'action'];
   // test variables
   fakeMortId: any;
   amount: any;
@@ -57,6 +57,8 @@ export class MortgageDetailComponent implements OnInit {
     this.mortgageDetailsService.getMortgageDetail(this.mortgageId).subscribe(
       (data) => {
         if (data) {
+          console.log('mortgage detial ' + JSON.stringify(data));
+
           this.interest = data.interestList[0].amount;
           this.mortgageDetails = data.mortgageDetailList;
         } else {

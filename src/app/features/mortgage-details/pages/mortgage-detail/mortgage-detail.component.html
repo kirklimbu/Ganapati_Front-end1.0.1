@@ -62,10 +62,15 @@
       class="example-full-width mb-3"
       hover="true"
     >
+      <!-- S.N -->
+      <ng-container matColumnDef="sn">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>S.N</th>
+        <td mat-cell *matCellDef="let element;index as i">{{ i+1 }}.</td>
+      </ng-container>
       <!-- date -->
       <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
-        <td mat-cell *matCellDef="let element">{{ element.nepDate }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.nepDate| date }}</td>
       </ng-container>
 
       <!-- Symbol Column -->
