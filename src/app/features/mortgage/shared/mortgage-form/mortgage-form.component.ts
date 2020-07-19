@@ -1,3 +1,5 @@
+import { Customer } from './../../../../core/models/customer.model';
+import { CustomerService } from './../../../customer/services/customer.service';
 import { Mortgage } from './../../../../core/models/mortgage.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -13,17 +15,19 @@ export class MortgageFormComponent implements OnInit {
   // props
   mortgageForm: FormGroup;
   mortgage: Mortgage = new Mortgage();
-
+  customers: Customer = new Customer();
   customerId: number;
 
   constructor(
     private fb: FormBuilder,
     private mortgageService: MortgageService,
+    private customerService: CustomerService,
     private route: ActivatedRoute,
     private router: Router // private toastr: NgxToastrS,
   ) {}
 
   ngOnInit(): void {
+    this.fetchCustomerDetail();
     this.getParamsFromUrl();
     this.buildMortgageForm();
   }
@@ -31,6 +35,14 @@ export class MortgageFormComponent implements OnInit {
   getParamsFromUrl() {
     this.route.queryParams.subscribe((params) => {
       this.customerId = +params.customerid;
+    });
+  }
+
+  // similar to getCustomerById
+  fetchCustomerDetail() {
+    this.customerService.getCustomerById().subscribe((res) => {
+      this.customers = res.filter((f) => f.customerid === this.customerId);
+      // console.log('filter customer data ' + JSON.stringify(this.customer));
     });
   }
 
@@ -121,26 +133,28 @@ export class MortgageFormComponent implements OnInit {
       : '';
   }
 
-  onSave(id, mortgage) {
+  onSave() {
     // get customerId from URL
-    mortgage = this.mortgageForm.value;
-    console.log(
-      'customerId inside createMortgage ' + id + ' ' + JSON.stringify(mortgage)
-    );
-    this.mortgageService.addMortgage(this.customerId, mortgage).subscribe(
-      (response) => {
-        console.log('inside new mortgage' + response);
-        // msg via toastr
-        this.router.navigate(['/ganapati/mortgage'], {
-          queryParams: { customerid: id },
-        });
-      },
-      (error) => {
-        console.log('error inside new mortgage ' + error);
-        // msg via toastr
-      }
-    );
+
+    this.mortgageService
+      .addMortgage(this.customerId, this.mortgageForm.value)
+      .subscribe(
+        (response) => {
+          console.log('inside new mortgage' + response);
+          // msg via toastr
+          this.router.navigate(['/ganapati/mortgage'], {
+            queryParams: { customerid: this.customerId },
+          });
+        },
+        (error) => {
+          console.log('error inside new mortgage ' + error);
+          // msg via toastr
+        }
+      );
   }
 
-  onCancel() {}
+  onCancel() {
+    console.log('cancel triggered mortgge form');
+    this.router.navigate(['/ganapati/customer']);
+  }
 }

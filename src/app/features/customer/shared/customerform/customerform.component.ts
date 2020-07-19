@@ -89,8 +89,8 @@ export class CustomerformComponent implements OnInit {
 
 
 
-  onCancel = () => {
-    return null;
+  onCancel (){
+    this.router.navigate(['/ganapati/customer'])
     // this.location.reload();
   };
 }

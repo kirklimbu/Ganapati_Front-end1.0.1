@@ -1,3 +1,4 @@
+import { EditMortgageDetailComponent } from './pages/edit-mortgage-detail/edit-mortgage-detail.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MortgageDetailComponent } from './pages/mortgage-detail/mortgage-detail.component';
@@ -11,6 +12,14 @@ const routes: Routes = [
   {
     path: 'add-mortgage-details',
     component: MortgageDetailFormComponent,
+    data:{
+      breadcrumb:'Add mortgage-detail'
+    }
+  },
+  {
+    path: 'edit-mortgage-details',
+    component: EditMortgageDetailComponent,
+
   },
 ];
 

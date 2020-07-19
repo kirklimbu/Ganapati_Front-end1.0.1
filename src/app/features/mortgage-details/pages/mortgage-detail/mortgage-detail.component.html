@@ -1,42 +1,55 @@
+<!-- mortgage detail page -->
 <div class="content-wrapper">
-  <mat-card class="mortgagedetail-card mt-4 mb-4">
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>Mortgage details collection: </mat-card-title>
-      <mat-card-subtitle>Below are the lists of mortgages: </mat-card-subtitle>
-    </mat-card-header>
-    <!--  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">-->
-    <mat-card-content>
-      <mat-list>
-        <h3 mat-subheader >Detials:</h3>
-        <mat-list-item>
-          <mat-icon mat-list-icon >details</mat-icon>
-          <!--<div>
-            <a
-              [routerLink]="['/createmortgages']"
-              mat-stroked-button
-              color="primary"
-              class="mt-3 mb-3"
-            >Add Mortgage Detail: <mat-icon align="center">add</mat-icon></a
-            >
-          </div>    -->
-          <div *ngFor="let item of mortgages">
-          <h4 mat-line>Mortgage Id: {{ item.mortgageId }}</h4>
-          <h4 mat-line>Valuation: {{ item.amount }}</h4>
-          <h4 mat-line>Date: {{ item.engDate | date }}</h4>
-          <h4 mat-line>Interest: {{ interest }}</h4>
-          <h4 mat-line>Interest Received: {{ item.interestReceivedCollection[0] }}</h4>
-        </div>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-      </mat-list>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button (click)="goToList()">
-        <mat-icon aria-label="arrow back" color="primary">arrow_back</mat-icon>
-      </button>
-    </mat-card-actions>
-  </mat-card>
+  <!-- breadcrumb -->
+  <ganapati-breadcrumb></ganapati-breadcrumb>
+  <section fxLayout="row wrap" fxLayoutAlign="center center">
+    <mat-card
+      fxFlex="500px"
+      fxFlex.xs="100%"
+      class="mortgagedetail-card mt-4 mb-4"
+    >
+      <mat-card-title align="center"
+        >Mortgage details collection:
+      </mat-card-title>
+      <mat-card-subtitle *ngFor="let customer of customers" align="center"
+        >Customer:
+        <strong class="mt-2"
+          ><u style="color: rgb(65, 65, 156);"
+            >{{ customer.fname | titlecase }}
+            {{ customer.lname | titlecase }}</u
+          >
+        </strong></mat-card-subtitle
+      >
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <mat-list>
+          <h3 mat-subheader><u>Detials:</u></h3>
+          <mat-list-item>
+            <mat-icon mat-list-icon>details</mat-icon>
+
+            <div *ngFor="let item of mortgages">
+              <h4 mat-line>Mortgage Id: {{ item.mortgageId }}</h4>
+              <h4 mat-line>Valuation: {{ item.amount }}</h4>
+              <h4 mat-line>Date: {{ item.engDate | date }}</h4>
+              <h4 mat-line>Interest: Rs. {{ interest }}</h4>
+              <h4 mat-line>
+                Interest Received: Rs.
+                {{ item.interestReceivedCollection[0].amount }}
+              </h4>
+            </div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        </mat-list>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button (click)="goToList()">
+          <mat-icon aria-label="arrow back" color="primary"
+            >arrow_back</mat-icon
+          >
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </section>
 </div>
 
 <!-- test table -->
@@ -65,12 +78,12 @@
       <!-- S.N -->
       <ng-container matColumnDef="sn">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>S.N</th>
-        <td mat-cell *matCellDef="let element;index as i">{{ i+1 }}.</td>
+        <td mat-cell *matCellDef="let element; index as i">{{ i + 1 }}.</td>
       </ng-container>
       <!-- date -->
       <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
-        <td mat-cell *matCellDef="let element">{{ element.nepDate| date }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.nepDate | date }}</td>
       </ng-container>
 
       <!-- Symbol Column -->
@@ -101,6 +114,8 @@
             [enableAdd]
             [enableEdit]
             [enableDelete]
+            (edit)="onEdit(row.mortDetId, row.amount, row.status)"
+            (add)="onAdd()"
           ></ganapati-action-buttons>
         </td>
       </ng-container>

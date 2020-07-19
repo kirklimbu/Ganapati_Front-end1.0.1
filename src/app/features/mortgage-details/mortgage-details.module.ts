@@ -7,9 +7,10 @@ import { MortgageDetailFormComponent } from './shared/mortgage-detail-form/mortg
 import { MaterialModule } from 'src/app/shared/material/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { EditMortgageDetailComponent } from './pages/edit-mortgage-detail/edit-mortgage-detail.component';
 
 @NgModule({
-  declarations: [MortgageDetailComponent, MortgageDetailFormComponent],
+  declarations: [MortgageDetailComponent, MortgageDetailFormComponent, EditMortgageDetailComponent],
   imports: [
     CommonModule,
     MortgageDetailsRoutingModule,

@@ -79,7 +79,7 @@ export class CustomerComponent implements OnInit {
       data: { customerid, fname, lname, address, mobile, registerAt },
       disableClose: true,
       width: '400px',
-      height: '500px',
+      height: '550px',
     });
 
     dialogRef.afterClosed().subscribe((result) => {

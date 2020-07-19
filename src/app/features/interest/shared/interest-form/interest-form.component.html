@@ -1,0 +1,79 @@
+<div class="content-wrapper">
+  <!-- breadcrumb -->
+  <ganapati-breadcrumb></ganapati-breadcrumb>
+  <div id="interestForm-card">
+    <section fxLayout="row wrap" fxLayoutAlign="center center">
+      <mat-card fxFlex="500px" fxFlex.xs="100%" class="mt-4">
+        <mat-card-title align="center">Add Interest </mat-card-title>
+        <mat-divider></mat-divider>
+        <form
+          [formGroup]="interestForm"
+          autocomplete="off"
+          novalidate
+          fxLayout="column wrap"
+          fxLayoutAlign="center center"
+          fxLayoutGap="10px"
+        >
+          <mat-card-content>
+            <!-- amount -->
+
+            <div class="row">
+              <div class="col-md-6 col-sm-6 mx-auto mb-4 mt-4">
+                <mat-form-field class="example-full-width">
+                  <input
+                    matInput
+                    type="number"
+                    placeholder="Amount"
+                    formControlName="amount"
+                    id="amount"
+                  />
+                  <mat-hint align="end">Amount given to the client.</mat-hint>
+                  <mat-error *ngIf="interestForm.controls['amount'].invalid">{{
+                    getAmountErrorMessage()
+                  }}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <!-- nepali date of transaction -->
+            <div class="row">
+              <div class="col-md-6 col-sm-6 mx-auto mb-4">
+                <mat-form-field class="example-full-width">
+                  <!--          <mat-label>Angular forms (w/ deserialization)</mat-label>-->
+                  <mat-label>Date</mat-label>
+                  <input
+                    matInput
+                    [matDatepicker]="picker2"
+                    formControlName="nepDate"
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="picker2"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+                  <mat-hint align="end">Date of transaction.</mat-hint>
+                  <mat-error *ngIf="interestForm.controls['nepDate'].invalid">{{
+                    getNepaliDateErrorMessage()
+                  }}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+          </mat-card-content>
+          <!-- save/cancel -->
+          <div class="row">
+            <div class="col-md-9 col-sm-6">
+              <mat-card-actions align="center">
+                <ganapati-save-cancel-buttons
+                  (save)="onSave()"
+                  (cancel)="onCancel()"
+                >
+                </ganapati-save-cancel-buttons>
+              </mat-card-actions>
+            </div>
+          </div>
+        </form>
+      </mat-card>
+    </section>
+  </div>
+</div>

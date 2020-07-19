@@ -1,75 +1,101 @@
 <div class="content-wrapper">
-
+  <!-- breadcrumb -->
+  <ganapati-breadcrumb></ganapati-breadcrumb>
   <section id="customer-card" fxLayout="row wrap" fxLayoutAlign="center center">
     <mat-card fxFlex="500px" fxFlex.xs="100%" class="mt-4 mb-4">
       <mat-card-title class="text-center">Add Customer</mat-card-title>
       <mat-divider></mat-divider>
-      <form [formGroup]="customerForm" autocomplete="off" novalidate fxLayout="column wrap"
-        fxLayoutAlign="center center" fxLayoutGap="10px">
-        <mat-card-content class="mt-4 ">
+      <form
+        [formGroup]="customerForm"
+        autocomplete="off"
+        novalidate
+        fxLayout="column wrap"
+        fxLayoutAlign="center center"
+        fxLayoutGap="10px"
+      >
+        <mat-card-content class="mt-4">
           <div class="row">
             <div class="col-md-6 col-sm-6 mx-auto">
               <mat-form-field class="example-full-width">
-                <input matInput type="text" placeholder="First name" formControlName="fname" id="fname" />
+                <input
+                  matInput
+                  type="text"
+                  placeholder="First name"
+                  formControlName="fname"
+                  id="fname"
+                />
                 <mat-hint align="end">Enter customer's first name</mat-hint>
-                <mat-error
-                *ngIf="customerForm.controls['fname'].invalid"
-                >{{ getFirstNameErrorMessage() }}</mat-error
-              >
+                <mat-error *ngIf="customerForm.controls['fname'].invalid">{{
+                  getFirstNameErrorMessage()
+                }}</mat-error>
               </mat-form-field>
             </div>
           </div>
 
           <div class="row">
-            <div class=" col-md-6 col-sm-6 mx-auto">
-              <mat-form-field class="example-full-width">
-                <input matInput type="text" placeholder="Last name" formControlName="lname" id="lname"
-                  fxlayoutalign="column" />
-                <mat-hint align="end">Enter customer's last name</mat-hint>
-                <mat-error
-                *ngIf="customerForm.controls['lname'].invalid"
-                >{{ getLastNameErrorMessage() }}</mat-error
-              >
-              </mat-form-field>
-            </div>
-          </div>
-          <div class="row">
-
             <div class="col-md-6 col-sm-6 mx-auto">
               <mat-form-field class="example-full-width">
-                <input matInput type="text" placeholder="Address" formControlName="address" />
-                <mat-hint align="end">Enter customer's address</mat-hint>
-                <mat-error
-                *ngIf="customerForm.controls['address'].invalid"
-                >{{ getAddressErrorMessage() }}</mat-error
-              >
+                <input
+                  matInput
+                  type="text"
+                  placeholder="Last name"
+                  formControlName="lname"
+                  id="lname"
+                  fxlayoutalign="column"
+                />
+                <mat-hint align="end">Enter customer's last name</mat-hint>
+                <mat-error *ngIf="customerForm.controls['lname'].invalid">{{
+                  getLastNameErrorMessage()
+                }}</mat-error>
               </mat-form-field>
             </div>
           </div>
           <div class="row">
-
+            <div class="col-md-6 col-sm-6 mx-auto">
+              <mat-form-field class="example-full-width">
+                <input
+                  matInput
+                  type="text"
+                  placeholder="Address"
+                  formControlName="address"
+                />
+                <mat-hint align="end">Enter customer's address</mat-hint>
+                <mat-error *ngIf="customerForm.controls['address'].invalid">{{
+                  getAddressErrorMessage()
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
             <div class="col-md-6 col-sm-6 mx-auto">
               <mat-form-field class="example-full-width" align="center">
-                <input matInput type="number" placeholder="Mobile number" formControlName="mobile" />
+                <input
+                  matInput
+                  type="number"
+                  placeholder="Mobile number"
+                  formControlName="mobile"
+                />
                 <mat-hint align="end">Enter customer's mobile number</mat-hint>
-                <mat-error
-                *ngIf="customerForm.controls['mobile'].invalid"
-                >{{ getMobileErrorMessage() }}</mat-error
-              >
+                <mat-error *ngIf="customerForm.controls['mobile'].invalid">{{
+                  getMobileErrorMessage()
+                }}</mat-error>
               </mat-form-field>
-
             </div>
           </div>
-
         </mat-card-content>
         <mat-divider></mat-divider>
-
-        <mat-card-actions class="mr-5">
-
-          <ganapati-save-cancel-buttons (save)="onSave()" (cancel)="onCancel()">
-
-          </ganapati-save-cancel-buttons>
-        </mat-card-actions>
+        <!-- save/cancel -->
+        <div class="row">
+          <div class="col-md-9 col-sm-6">
+            <mat-card-actions align="center">
+              <ganapati-save-cancel-buttons
+                (save)="onSave()"
+                (cancel)="onCancel()"
+              >
+              </ganapati-save-cancel-buttons>
+            </mat-card-actions>
+          </div>
+        </div>
       </form>
     </mat-card>
   </section>
