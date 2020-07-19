@@ -1,3 +1,5 @@
+import { Customer } from './../../../../core/models/customer.model';
+import { CustomerService } from './../../../customer/services/customer.service';
 // angular
 import { Component, OnInit } from '@angular/core';
 import {
@@ -19,6 +21,7 @@ import { MortgageDetail } from 'src/app/core/models/mortgage-detail.model';
 export class MortgageDetailFormComponent implements OnInit {
   // props
   mortgageDetail: MortgageDetail = new MortgageDetail();
+  customers: Customer = new Customer();
   motrgageDetailForm: FormGroup;
   mortgageId: number;
   customerId: number;
@@ -30,11 +33,13 @@ export class MortgageDetailFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private mortgageDetailsService: MortgageDetailService,
+    private customerService: CustomerService,
     private route: ActivatedRoute,
     private router: Router // private toastrService: ToastrService
   ) {}
 
   ngOnInit() {
+    this.fetchCustomerDetail();
     this.getQueryParamValue();
     this.buidMortgageDetailForm();
   }
@@ -44,7 +49,7 @@ export class MortgageDetailFormComponent implements OnInit {
       this.mortgageId = +params.mortgageId;
       this.customerId = +params.customerId;
       console.log(
-        'mortgageId from server ' + this.mortgageId + this.customerId
+        'mortgageId from server ' + `${this.mortgageId}, ${this.customerId}`
       );
     });
   }
@@ -59,7 +64,23 @@ export class MortgageDetailFormComponent implements OnInit {
     });
   }
 
-  onCancel() {}
+  // similar to getCustomerById
+  fetchCustomerDetail() {
+    this.customerService.getCustomerById().subscribe((res) => {
+      this.customers = res.filter((f) => f.customerid === this.customerId);
+      console.log('filter customer data ' + JSON.stringify(this.customers));
+    });
+  }
+
+  onCancel() {
+    console.log('cancel triggered');
+
+    this.router.navigate(['ganapati/mortgage'], {
+      queryParams: {
+        customerid: this.customerId,
+      },
+    });
+  }
 
   createMortgageDetail(id, rate) {
     // this.rate = rate;

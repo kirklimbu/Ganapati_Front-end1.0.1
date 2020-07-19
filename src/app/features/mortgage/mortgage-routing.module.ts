@@ -3,21 +3,23 @@ import { MortgageComponent } from './pages/mortgage/mortgage.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-
 const routes: Routes = [
   {
     path: '',
-    component: MortgageComponent
+    component: MortgageComponent,
     // component: MortgageFormComponent
   },
   {
     path: 'add-mortgage',
-    component: MortgageFormComponent
+    component: MortgageFormComponent,
+    data: {
+      breadcrumb: 'Add mortgage',
+    },
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class MortgageRoutingModule { }
+export class MortgageRoutingModule {}

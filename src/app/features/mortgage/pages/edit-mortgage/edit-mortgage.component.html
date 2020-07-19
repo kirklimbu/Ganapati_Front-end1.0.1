@@ -1,23 +1,22 @@
-<!-- mortgage form page -->
 <div class="content-wrapper">
-  <!-- breadcrumb -->
-  <ganapati-breadcrumb></ganapati-breadcrumb>
-  <div id="mortgageForm-card">
+  <div id="mortgageEditForm-card">
     <section fxLayout="row wrap" fxLayoutAlign="center center">
+      <!--<div>
+      <a
+        [routerLink]="['/createmortgagedetail']"
+        mat-stroked-button
+        color="primar"
+        class="mt-4"
+        >Add Mortgage Detail: <mat-icon align="center">add</mat-icon></a
+      >
+    </div>-->
       <mat-card fxFlex="500px" fxFlex.xs="100%" class="mt-4">
-        <mat-card-title align="center">Add mortgage </mat-card-title
-        ><mat-card-subtitle *ngFor="let customer of customers" align="center"
-          >Customer:
-          <strong
-            ><u style="color: rgb(65, 65, 156);"
-              >{{ customer.fname | titlecase }}
-              {{ customer.lname | titlecase }}</u
-            >
-          </strong></mat-card-subtitle
+        <mat-card-title align="center"
+          >Edit mortgage </mat-card-title
         >
         <mat-divider></mat-divider>
         <form
-          [formGroup]="mortgageForm"
+          [formGroup]="mortgageEditForm"
           autocomplete="off"
           novalidate
           fxLayout="column wrap"
@@ -27,8 +26,8 @@
           <mat-card-content>
             <!-- quantity -->
             <div class="row">
-              <div class="col-md-6 col-sm-6 mx-auto mt-4 " >
-                <mat-form-field class="example-full-width">
+              <div class="col-md-6 col-sm-6 mx-auto">
+                <mat-form-field class="example-full-width mt-4 mb-4">
                   <input
                     matInput
                     type="text"
@@ -39,7 +38,7 @@
                   <mat-hint align="end"
                     >Enter the quantity of item in grams(gm).</mat-hint
                   >
-                  <mat-error *ngIf="mortgageForm.controls['qty'].invalid">{{
+                  <mat-error *ngIf="mortgageEditForm.controls['qty'].invalid">{{
                     getQuantityErrorMessage()
                   }}</mat-error>
                 </mat-form-field>
@@ -47,7 +46,7 @@
             </div>
             <!-- reason -->
             <div class="row">
-              <div class="col-md-6 col-sm-6 mx-auto">
+              <div class="col-md-6 col-sm-6 mx-auto mb-4">
                 <mat-form-field class="example-full-width">
                   <input
                     matInput
@@ -57,7 +56,7 @@
                     id="reason"
                   />
                   <mat-hint align="end">Enter the reason of deposit.</mat-hint>
-                  <mat-error *ngIf="mortgageForm.controls['reason'].invalid">{{
+                  <mat-error *ngIf="mortgageEditForm.controls['reason'].invalid">{{
                     getReasonErrorMessage()
                   }}</mat-error>
                 </mat-form-field>
@@ -67,7 +66,7 @@
             <!-- amount -->
 
             <div class="row">
-              <div class="col-md-6 col-sm-6 mx-auto">
+              <div class="col-md-6 col-sm-6 mx-auto mb-4">
                 <mat-form-field class="example-full-width">
                   <input
                     matInput
@@ -77,7 +76,7 @@
                     id="amount"
                   />
                   <mat-hint align="end">Amount given to the client.</mat-hint>
-                  <mat-error *ngIf="mortgageForm.controls['amount'].invalid">{{
+                  <mat-error *ngIf="mortgageEditForm.controls['amount'].invalid">{{
                     getAmountErrorMessage()
                   }}</mat-error>
                 </mat-form-field>
@@ -86,7 +85,7 @@
 
             <!-- notificaton -->
             <div class="row">
-              <div class="col-md-6 col-sm-6 mx-auto">
+              <div class="col-md-6 col-sm-6 mx-auto mb-4">
                 <mat-form-field class="example-full-width">
                   <input
                     matInput
@@ -99,7 +98,7 @@
                     >Number of notifications send to the client.</mat-hint
                   >
                   <mat-error
-                    *ngIf="mortgageForm.controls['notiSeen'].invalid"
+                    *ngIf="mortgageEditForm.controls['notiSeen'].invalid"
                     >{{ getNotificationErrorMessage() }}</mat-error
                   >
                 </mat-form-field>
@@ -108,7 +107,7 @@
 
             <!-- fake mortgage id -->
             <div class="row">
-              <div class="col-md-6 col-sm-6 mx-auto">
+              <div class="col-md-6 col-sm-6 mx-auto mb-4">
                 <mat-form-field class="example-full-width">
                   <input
                     matInput
@@ -119,7 +118,7 @@
                   />
                   <mat-hint align="end">Hand written bill number.</mat-hint>
                   <mat-error
-                    *ngIf="mortgageForm.controls['fakeMortId'].invalid"
+                    *ngIf="mortgageEditForm.controls['fakeMortId'].invalid"
                     >{{ getFakeMortIdrrorMessage() }}</mat-error
                   >
                 </mat-form-field>
@@ -128,7 +127,7 @@
 
             <!-- nepali date of transaction -->
             <div class="row">
-              <div class="col-md-6 col-sm-6 mx-auto">
+              <div class="col-md-6 col-sm-6 mx-auto mb-4">
                 <mat-form-field class="example-full-width">
                   <!--          <mat-label>Angular forms (w/ deserialization)</mat-label>-->
                   <mat-label>Date</mat-label>
@@ -143,27 +142,26 @@
                   ></mat-datepicker-toggle>
                   <mat-datepicker #picker2></mat-datepicker>
                   <mat-hint align="end">Date of transaction.</mat-hint>
-                  <mat-error *ngIf="mortgageForm.controls['nepDate'].invalid">{{
+                  <mat-error *ngIf="mortgageEditForm.controls['nepDate'].invalid">{{
                     getNepaliDateErrorMessage()
                   }}</mat-error>
                 </mat-form-field>
               </div>
             </div>
-          </mat-card-content>
-          <mat-divider></mat-divider>
-
-          <!-- save/cancel -->
-          <div class="row">
-            <div class="col-md-9 col-sm-6">
-              <mat-card-actions align="center">
-                <ganapati-save-cancel-buttons
-                  (save)="onSave()"
-                  (cancel)="onCancel()"
-                >
-                </ganapati-save-cancel-buttons>
-              </mat-card-actions>
+            <!-- <mat-divider></mat-divider> -->
+            <!-- save/cancel -->
+            <div class="row">
+              <div class="col-md-9 col-sm-6">
+                <mat-card-actions align="center">
+                  <ganapati-save-cancel-buttons
+                    (save)="onSave()"
+                  >
+                    (cancel)="onCancel()" >
+                  </ganapati-save-cancel-buttons>
+                </mat-card-actions>
+              </div>
             </div>
-          </div>
+          </mat-card-content>
         </form>
       </mat-card>
     </section>

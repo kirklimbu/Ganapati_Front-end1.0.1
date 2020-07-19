@@ -50,6 +50,18 @@ export class CustomerService {
     )
   }
 
+  getCustomerById():any{
+    return (
+      this.http
+        .get(`${environment.apiUrl}auth/customer`
+        )
+        .pipe(retry(2),
+          catchError(err => {
+            return Observable.throw(err)
+          }))
+    )
+  }
+
   // edit
   updateCustomer(customer: Customer): Observable<any> {
 

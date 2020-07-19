@@ -1,0 +1,98 @@
+  <h2 mat-dialog-title>
+    Edit mortgagedetails{{ mortgageId }}
+  </h2>
+
+  <mat-divider></mat-divider>
+  <mat-dialog-content class="mat-typography">
+    <form
+      [formGroup]="motrgageDetailEditForm"
+      autocomplete="off"
+      novalidate
+      fxLayout="column wrap"
+      fxLayoutAlign="center center"
+      fxLayoutGap="10px"
+    >
+      <!-- amount -->
+      <mat-card-content>
+        <div class="row">
+          <div class="col-md-9 col-sm-6 mx-auto mt-4 mb-4">
+            <mat-form-field class="example-full-width">
+              <input
+                matInput
+                type="text"
+                placeholder="Amount"
+                formControlName="amount"
+                id="amount"
+                required
+              />
+              <mat-hint align="end">Enter amount paid to customer.</mat-hint>
+              <!-- <mat-error *ngIf="hasError('quantity', 'required')">Quantity is required</mat-error>
+             <mat-error *ngIf="hasError('quantity', 'maxlength')">You have more than 25 characters</mat-error>-->
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- status -->
+        <div class="row">
+          <div class="col-md-9 col-sm-6 mx-auto">
+            <mat-form-field class="example-full-width">
+              <mat-label>Select staus</mat-label>
+              <mat-select formControlName="status" required>
+                <mat-option value="P">paid</mat-option>
+                <mat-option value="R">recieved</mat-option>
+              </mat-select>
+              <mat-hint align="end"></mat-hint>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- rate of interest -->
+        <div class="row">
+          <div class="col-md-9 col-sm-6 mx-auto">
+            <mat-form-field class="example-full-width">
+              <input
+                matInput
+                type="text"
+                placeholder="Rate of interest"
+                formControlName="rate"
+                id="rate"
+                required
+              />
+              <mat-hint align="end">Amount given to the client</mat-hint>
+              <!--        <mat-error *ngIf="hasError('address', 'required')">Address is required</mat-error>-->
+              <!--          <mat-error *ngIf="hasError('address', 'maxlength')">You have more than 100 characters</mat-error>-->
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- date -->
+        <!-- <div class="row">
+            <div class=" mx-auto">
+              <mat-form-field class="example-full-width">
+                <input
+                  matInput
+                  [matDatepicker]="picker2"
+                  [formControl]="serializedDate"
+                  formControlName="nepDate"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker2"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div> -->
+      </mat-card-content>
+      <div class="row">
+        <div class="col-md-9 col-sm-6">
+          <mat-card-actions align="center">
+            <ganapati-save-cancel-buttons
+              (save)="saveMortgageDetail()"
+              (cancel)="onCancel()"
+            ></ganapati-save-cancel-buttons>
+          </mat-card-actions>
+        </div>
+      </div>
+    </form>
+  </mat-dialog-content>

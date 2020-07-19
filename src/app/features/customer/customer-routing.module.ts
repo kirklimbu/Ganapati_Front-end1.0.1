@@ -19,7 +19,10 @@ const routes: Routes = [
   },
   {
     path: 'add-customer',
-    component: CustomerformComponent
+    component: CustomerformComponent,
+    data:{
+      breadcrumb:'Add customer'
+    }
   },
   {
     path: 'edit-customer',
