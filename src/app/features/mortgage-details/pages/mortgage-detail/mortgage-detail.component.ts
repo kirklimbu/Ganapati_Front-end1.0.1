@@ -99,8 +99,9 @@ export class MortgageDetailComponent implements OnInit {
         this.mortgageDetails = data.mortgageDetailList;
       },
       (err) => {
-        this.toastr.error(err.error.message);
-      }
+        err = err.error.message
+        ? this.toastr.error(err.error.message)
+        : this.toastr.error('Error fetching mortgage details.');      }
     );
   }
 

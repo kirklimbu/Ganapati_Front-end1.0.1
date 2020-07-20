@@ -18,17 +18,15 @@ const routes: Routes = [
       ),
     canActivate: [AuthGuardService],
   },
-  {
-    path: 'page-not-found',
-    component: PageNotFoundComponent,
-  },
 
-  /* {
+  {
     path: '',
-    redirectTo: '404',
-  }, */
+    pathMatch: 'full',
+    redirectTo: 'login',
+  },
   {
     path: '**',
+    pathMatch: 'full',
     redirectTo: 'login',
   },
 ];

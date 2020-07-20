@@ -40,7 +40,12 @@ export class InterestFormComponent implements OnInit {
     this.customerService.getCustomerById().subscribe((res) => {
       // this.customers = res.filter((f) => f.customerid === this.customerId); // get customerId
       console.log('filter customer data ' + JSON.stringify(this.customers));
-    });
+    }),
+      (err) => {
+        err = err.error.message
+          ? this.toastr.error(err.error.message)
+          : this.toastr.error('Error fetching customer detail.');
+      };
   }
 
   fetchParamFromUrl() {
@@ -88,8 +93,9 @@ export class InterestFormComponent implements OnInit {
             });
           },
           (err) => {
-            console.log('inside interest error' + err);
-            this.toastr.error(err.error.message);
+            err = err.error.message
+              ? this.toastr.error(err.error.message)
+              : this.toastr.error('Error adding interst data.');
           }
         );
     } else {

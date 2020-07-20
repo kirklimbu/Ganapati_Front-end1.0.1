@@ -28,11 +28,11 @@ export class InterestService {
         `${this.API_URL}auth/customer/mortgage/interestreceive?mortgageId=${mortgageId}`,
         { ...interest }
       )
-      /* .pipe(
+      .pipe(
         catchError((err) => {
-          return Observable.throw(err);
+          return throwError(err);
         })
-      ); */
+      );
   }
 
   getTotalInterest(mortgageId: number): any {
@@ -42,7 +42,7 @@ export class InterestService {
       )
       .pipe(
         catchError((err) => {
-          return Observable.throw(err);
+          return throwError(err);
         })
       );
   }

@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { ProfileService } from './../../services/profile.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -14,6 +15,7 @@ export class EditProfileComponent implements OnInit {
   formSubmitted = false;
   constructor(
     private profileService: ProfileService,
+    private toastr: ToastrService,
     private router: Router,
     private fb: FormBuilder
   ) {}
@@ -57,7 +59,9 @@ export class EditProfileComponent implements OnInit {
           console.log('changed profile successfully.');
         },
         (err) => {
-          console.log('errror in profile edit' + JSON.stringify(err));
+          err = err.error.message
+            ? this.toastr.error(err.error.message)
+            : this.toastr.error('Error add new mortgage detail.');
         }
       );
     } else {
@@ -65,5 +69,7 @@ export class EditProfileComponent implements OnInit {
     }
   }
 
-  onCancel() {}
+  onCancel() {
+    this.router.navigate(['/ganapati/profile']);
+  }
 }

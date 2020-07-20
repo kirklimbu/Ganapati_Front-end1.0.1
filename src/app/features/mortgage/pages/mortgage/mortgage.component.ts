@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Customer } from './../../../../core/models/customer.model';
 import { MatDialog } from '@angular/material/dialog';
 import { EditMortgageComponent } from './../edit-mortgage/edit-mortgage.component';
@@ -22,6 +23,7 @@ export class MortgageComponent implements OnInit {
   constructor(
     private mortgageService: MortgageService,
     private customerService: CustomerService,
+    private toastr: ToastrService,
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
@@ -47,15 +49,25 @@ export class MortgageComponent implements OnInit {
         'mortgage inner data ' +
           JSON.stringify(data[0].mortgageDetailsCollection[0].status)
       );
-    });
+    }),
+      (err) => {
+        err = err.error.message
+          ? this.toastr.error(err.error.message)
+          : this.toastr.error('Error fetchind mortgage list.');
+      };
   }
 
-// similar to getCustomerById
+  // similar to getCustomerById
   fetchCustomerDetail() {
     this.customerService.getCustomerById().subscribe((res) => {
-        this.customers = res.filter((f) => f.customerid === this.id);
+      this.customers = res.filter((f) => f.customerid === this.id);
       // console.log('filter customer data ' + JSON.stringify(this.customer));
-    });
+    }),
+      (err) => {
+        err = err.error.message
+          ? this.toastr.error(err.error.message)
+          : this.toastr.error('Error fetching customer detail.');
+      };
   }
 
   goToList() {
@@ -102,7 +114,6 @@ export class MortgageComponent implements OnInit {
   refreshTable() {}
 
   onDelete(mortgage) {
-
     console.log('mortgage ddelete triggered for: ' + JSON.stringify(mortgage));
 
     const dialogRef = this.dialog.open(DeletePopupComponent, {
@@ -130,7 +141,7 @@ export class MortgageComponent implements OnInit {
               sub.unsubscribe();
             },
             (err) => {
-              // this.toastr.error('Error removing customer.');
+              this.toastr.error('Error removing customer.');
               sub.unsubscribe();
             }
           );

@@ -134,3 +134,45 @@ mat-sidenav {
   width: 550px;
 }
 
+/* Error 404 */
+.error-404{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // background-image: url('https://via.placeholder.com/1920x1080');
+  background-size: cover;
+  background-position: center center;
+  z-index: 2;
+}
+.error-404::before,
+.lock-screen::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ff00009e;
+  z-index: -1;
+}
+.error-404 .content-wrapper{
+  text-align: center;
+}
+.error-404 .content-wrapper i::before{
+  font-size: 8rem;
+}
+.error-404 .content-wrapper a i{
+  margin-right: 5px;
+}
+.error-404 .content-wrapper h3{
+  font-size: 24px;
+  font-weight: 400;
+}
+.error-404 .content-wrapper h1,
+.error-404 .content-wrapper h3,
+.error-404 .content-wrapper p,
+.error-404 .content-wrapper i::before{
+  color: #fff;
+  margin-bottom: 1rem;
+}

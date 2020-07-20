@@ -22,17 +22,17 @@
           ></div>
 
           <mat-menu #menu="matMenu">
-            <button mat-menu-item>
+            <button mat-menu-item routerLink="/ganapati/profile">
               <mat-icon>person</mat-icon>
-              <span routerLink="/ganapati/profile">Profile</span>
+              <span>Profile</span>
             </button>
-            <button mat-menu-item>
+            <button mat-menu-item routerLink="/ganapati/profile/edit-profile">
               <mat-icon>settings</mat-icon>
-              <span routerLink="/ganapati/profile/edit-profile">Account Setting</span>
+              <span>Account Setting</span>
             </button>
-            <button mat-menu-item>
+            <button mat-menu-item (click)="logout()">
               <mat-icon>power_settings_new</mat-icon>
-              <span (click)="logout()">Log out</span>
+              <span>Log out</span>
             </button>
           </mat-menu>
         </div>

@@ -17,11 +17,9 @@ export class CustomerformComponent implements OnInit {
   customer: Customer = new Customer();
 
   constructor(
-    private http: HttpClient,
     private customerService: CustomerService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute,
     private toastr: ToastrService
   ) {}
 
@@ -75,11 +73,9 @@ export class CustomerformComponent implements OnInit {
           );
         },
         (err) => {
-          if (err.error.errors[0].defaultMessage) {
-            this.toastr.error(err.error.errors[0].defaultMessage);
-          } else {
-            this.toastr.error('Error adding new customer.');
-          }
+          err = err.error.message
+            ? this.toastr.error(err.error.message)
+            : this.toastr.error('Error adding new customer.');
         }
       );
     }

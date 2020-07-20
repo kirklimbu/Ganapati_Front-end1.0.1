@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Mortgage } from 'src/app/core/models/mortgage.model';
@@ -14,14 +15,14 @@ export class EditMortgageComponent implements OnInit {
   // props
   mortgageEditForm: FormGroup;
   mortgage: Mortgage = new Mortgage();
-
   mortgageId: number;
 
   constructor(
     private fb: FormBuilder,
     private mortgageService: MortgageService,
     private route: ActivatedRoute,
-    private router: Router // private toastr: NgxToastrS,
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -75,6 +76,33 @@ export class EditMortgageComponent implements OnInit {
     });
   }
 
+  onSave(id?) {
+    this.mortgageService
+      .saveEditedMortgage(this.mortgageEditForm.value)
+      .subscribe(
+        (response) => {
+          console.log('inside new mortgage' + response);
+          // msg via toastr
+          this.router.navigate(['/ganapati/mortgage'], {
+            queryParams: { customerid: id },
+          });
+        },
+        (err) => {
+          err = err.error.message
+            ? this.toastr.error(err.error.message)
+            : this.toastr.error('Error updating mortgage.'); // msg via toastr
+        }
+      );
+  }
+
+  onCancel(id?) {
+    console.log('cancel triggered for edit mortgaege');
+
+    // this.router.navigate(['/ganapati/mortgage'], {
+    //   queryParams: { customerid: id },
+    // });
+  }
+
   // error message block
   getQuantityErrorMessage() {
     return this.mortgageEditForm.controls['qty'].hasError('required')
@@ -126,35 +154,5 @@ export class EditMortgageComponent implements OnInit {
     return this.mortgageEditForm.controls['nepDate'].hasError('required')
       ? 'Nepali transaction date required.'
       : '';
-  }
-
-  onSave(id?, mortgage?) {
-    // get customerId from URL
-    mortgage = this.mortgageEditForm.value;
-    console.log(
-      'customerId inside createMortgage ' + id + ' ' + JSON.stringify(mortgage)
-    );
-    this.mortgageService.saveEditedMortgage(this.mortgageEditForm.value).subscribe(
-      (response) => {
-        console.log('inside new mortgage' + response);
-        // msg via toastr
-        this.router.navigate(['/ganapati/mortgage'], {
-          queryParams: { customerid: id },
-        });
-      },
-      (error) => {
-        console.log('error inside new mortgage ' + error);
-        // msg via toastr
-      }
-    );
-  }
-
-  onCancel(id?) {
-    console.log('cancel triggered for edit mortgaege');
-
-    this.router.navigate(['/ganapati/mortgage'], {
-      // queryParams: { customerid: id },
-    });
-
   }
 }
