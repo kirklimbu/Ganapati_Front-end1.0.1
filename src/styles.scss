@@ -1,6 +1,6 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@import '~@angular/material/theming';
+@import "~@angular/material/theming";
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -18,7 +18,11 @@ $ganapatiAngular-accent: mat-palette($mat-pink, A200, A100, A400);
 $ganapatiAngular-warn: mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$ganapatiAngular-theme: mat-light-theme($ganapatiAngular-primary, $ganapatiAngular-accent, $ganapatiAngular-warn);
+$ganapatiAngular-theme: mat-light-theme(
+  $ganapatiAngular-primary,
+  $ganapatiAngular-accent,
+  $ganapatiAngular-warn
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -27,23 +31,24 @@ $ganapatiAngular-theme: mat-light-theme($ganapatiAngular-primary, $ganapatiAngul
 
 /* You can add global styles to this file, and also import other style files */
 
-/* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";
+@import "~ngx-toastr/toastr";
+
 // keyframes
 @-webkit-keyframes notesMembers {
-  0%{
+  0% {
     transform: scale(0.5);
   }
-  100%{
-  transform: scale(1);
+  100% {
+    transform: scale(1);
   }
 }
 @keyframes notesMembers {
-  0%{
+  0% {
     transform: scale(0.5);
   }
-  100%{
-  transform: scale(1);
+  100% {
+    transform: scale(1);
   }
 }
 
@@ -55,9 +60,8 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  padding:0;
+  padding: 0;
   font-size: 1rem;
-
 }
 
 // test style
@@ -68,16 +72,16 @@ body {
   transition: padding 0.3s;
   min-height: 100vh;
 }
-.horizontal-layout .body-content{
+.horizontal-layout .body-content {
   padding-left: 0;
 }
 
-.content-wrapper{
+.content-wrapper {
   // padding: 2rem;
   margin: 2rem;
 }
 
-.example-full-width{
+.example-full-width {
   width: 100%;
   margin-bottom: 1rem;
 }
@@ -89,11 +93,8 @@ mat-sidenav {
 }
 
 .logout-btn {
-
   color: red;
   position: relative;
-
-
 }
 
 .nav-bar-container {
@@ -105,7 +106,6 @@ mat-sidenav {
   margin-left: 12%;
   height: 5rem;
 
-
   mat-icon {
     size: 150px;
     // padding-right: 12px;
@@ -115,18 +115,22 @@ mat-sidenav {
 .mat-nav-list,
 .mat-icon {
   margin-right: 16px;
-  color:coral;
-
-
+  color: coral;
 }
 
-#sidenav{
-border-bottom: 1px red;
+#sidenav {
+  border-bottom: 1px red;
 }
 
-.logout:hover{
-border-bottom:red;
-color:red;
+.logout:hover {
+  border-bottom: red;
+  color: red;
 }
 
+#interestForm-card{
+  margin-left: 300px;
+  margin-right: 350px;
+  height: 350px;
+  width: 550px;
+}
 

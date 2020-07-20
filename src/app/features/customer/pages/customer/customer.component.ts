@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EditcustomerComponent } from '../editcustomer/editcustomer.component';
 import { finalize } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-customer',
@@ -42,7 +43,8 @@ export class CustomerComponent implements OnInit {
     private customerService: CustomerService,
     public dialog: MatDialog,
     private router: Router,
-    private route: ActivatedRoute // private toastrService: ToastrService // private spinner:NgxspinnerService
+    private route: ActivatedRoute,
+    private toastr: ToastrService // private spinner:NgxspinnerService
   ) {}
 
   ngOnInit() {
@@ -52,7 +54,6 @@ export class CustomerComponent implements OnInit {
   fetchCustomers() {
     this.customerService.getCustomers().subscribe(
       (data) => {
-        // this.toastrService.success('wel-come to customerlist page')
         console.log('customer list ' + JSON.stringify(data));
 
         this.customerListTableDataSource = new MatTableDataSource(data);
@@ -60,7 +61,7 @@ export class CustomerComponent implements OnInit {
         this.customerListTableDataSource.sort = this.sort;
       },
       (error) => {
-        console.log('error ma xu ' + error);
+        this.toastr.error(error);
       }
     );
   }
@@ -79,7 +80,7 @@ export class CustomerComponent implements OnInit {
       data: { customerid, fname, lname, address, mobile, registerAt },
       disableClose: true,
       width: '400px',
-      height: '550px',
+      height: '600px',
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -118,7 +119,6 @@ export class CustomerComponent implements OnInit {
     this.router.navigate(['/ganapati/mortgage'], {
       queryParams: { customerid: customerId },
     });
-
   }
 
   clearField() {
@@ -154,13 +154,13 @@ export class CustomerComponent implements OnInit {
           .subscribe(
             (data) => {
               customer.trackerModelDtoList[idx] = data.result; // or simply data
-              // this.toastr.success('Customer successfully deleted.');
+              this.toastr.success('Customer successfully deleted.');
               customer.trackerModelDtoList.splice(idx, 1);
               customer.showCancel = false;
               sub.unsubscribe();
             },
             (err) => {
-              // this.toastr.error('Error removing customer.');
+              this.toastr.error('Error removing customer.');
               sub.unsubscribe();
             }
           );

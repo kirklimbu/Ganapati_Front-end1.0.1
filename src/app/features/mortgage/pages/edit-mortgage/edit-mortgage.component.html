@@ -11,9 +11,7 @@
       >
     </div>-->
       <mat-card fxFlex="500px" fxFlex.xs="100%" class="mt-4">
-        <mat-card-title align="center"
-          >Edit mortgage </mat-card-title
-        >
+        <mat-card-title align="center">Edit mortgage </mat-card-title>
         <mat-divider></mat-divider>
         <form
           [formGroup]="mortgageEditForm"
@@ -56,9 +54,10 @@
                     id="reason"
                   />
                   <mat-hint align="end">Enter the reason of deposit.</mat-hint>
-                  <mat-error *ngIf="mortgageEditForm.controls['reason'].invalid">{{
-                    getReasonErrorMessage()
-                  }}</mat-error>
+                  <mat-error
+                    *ngIf="mortgageEditForm.controls['reason'].invalid"
+                    >{{ getReasonErrorMessage() }}</mat-error
+                  >
                 </mat-form-field>
               </div>
             </div>
@@ -76,9 +75,10 @@
                     id="amount"
                   />
                   <mat-hint align="end">Amount given to the client.</mat-hint>
-                  <mat-error *ngIf="mortgageEditForm.controls['amount'].invalid">{{
-                    getAmountErrorMessage()
-                  }}</mat-error>
+                  <mat-error
+                    *ngIf="mortgageEditForm.controls['amount'].invalid"
+                    >{{ getAmountErrorMessage() }}</mat-error
+                  >
                 </mat-form-field>
               </div>
             </div>
@@ -142,9 +142,10 @@
                   ></mat-datepicker-toggle>
                   <mat-datepicker #picker2></mat-datepicker>
                   <mat-hint align="end">Date of transaction.</mat-hint>
-                  <mat-error *ngIf="mortgageEditForm.controls['nepDate'].invalid">{{
-                    getNepaliDateErrorMessage()
-                  }}</mat-error>
+                  <mat-error
+                    *ngIf="mortgageEditForm.controls['nepDate'].invalid"
+                    >{{ getNepaliDateErrorMessage() }}</mat-error
+                  >
                 </mat-form-field>
               </div>
             </div>
@@ -155,8 +156,8 @@
                 <mat-card-actions align="center">
                   <ganapati-save-cancel-buttons
                     (save)="onSave()"
+                    (cancel)="onCancel()"
                   >
-                    (cancel)="onCancel()" >
                   </ganapati-save-cancel-buttons>
                 </mat-card-actions>
               </div>

@@ -1,2 +1,8 @@
-
-  
+.example-header-image {
+  background-size: cover;
+  height: 50px;
+  width: 50px;
+  border-radius: 60px;
+  background-image: url(src/assets/images/2.jpg);
+  // background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
+}

@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { MortgageDetailService } from './../../services/mortgage-detail.service';
 import {
   MatDialog,
@@ -35,7 +36,8 @@ export class EditMortgageDetailComponent implements OnInit {
     private mortgageDetailsService: MortgageDetailService,
     public dialogRef: MatDialogRef<EditMortgageDetailComponent>,
     private router: Router,
-    private mortgageService: MortgageDetailService
+    private mortgageService: MortgageDetailService,
+    private toastr: ToastrService
   ) {
     console.log('injected data' + JSON.stringify(data));
   }
@@ -46,18 +48,32 @@ export class EditMortgageDetailComponent implements OnInit {
   }
 
   fetchMortgageDetailEditForm() {
-    console.log('inside fetch');
+    console.log('inside fetch mortgage detail edit mortggae');
 
     this.mortgageService
       .getMortgageDetailEditForm(this.data.mortDetId)
-      .subscribe((res) => {
-        this.data2 = res;
-        console.log('mortgage  data2 ' + JSON.stringify(this.data2)); // START FROM HERE @EVENING FRIDAY --fetch mortdetail data2 --pass it to edit form ---aaile form ma set vako xaena
+      .subscribe(
+        (res) => {
+          this.data2 = res;
+          console.log('mortgage  data2 ' + JSON.stringify(this.data2)); // START FROM HERE @EVENING FRIDAY --fetch mortdetail data2 --pass it to edit form ---aaile form ma set vako xaena
 
-        this.mortgageRate = res.rate;
-        console.log('mortgage  rate ' + JSON.stringify(this.mortgageRate));
-        this.mortgageDetail = res.mortgageDetail;
-      });
+          this.mortgageRate = res.rate;
+          console.log('mortgage  rate ' + JSON.stringify(this.mortgageRate));
+          this.mortgageDetail = res.mortgageDetail;
+        },
+        (err) => {
+          this.toastr.error(
+            err.error.message
+            /* +{
+                disableTimeOut: true,
+                tapToDismiss: false,
+                toastClass: 'toast border-red',
+                closeButton: true,
+                positionClass: 'bottom-left',
+              } */
+          );
+        }
+      );
   }
 
   buidMortgageDetailEditForm() {
@@ -83,9 +99,7 @@ export class EditMortgageDetailComponent implements OnInit {
         .saveMortgageDetailEdit(this.motrgageDetailEditForm.value)
         .subscribe(
           (response) => {
-            console.log(
-              'successful entry of mortgage detail ' + JSON.stringify(response)
-            );
+            this.toastr.success('Mortgage detail updated successfully.');
             // this.router.navigate(["/mortgage-detail"],{relativeTo: this.route}) //dynamic routing
             this.router.navigate(['ganapati/mortgage-detail'], {
               queryParams: {
@@ -94,12 +108,15 @@ export class EditMortgageDetailComponent implements OnInit {
               }, //static routing
             });
           },
-          (error) => {
-            console.log(error);
+          (err) => {
+
+            err = err.error.message
+              ? this.toastr.error(err.error.message)
+              : this.toastr.error('Error in editing mortgage detail ');
           }
         );
     } else {
-      console.log('invalid form');
+      console.log('invalid form'); // remove on production
     }
   }
 

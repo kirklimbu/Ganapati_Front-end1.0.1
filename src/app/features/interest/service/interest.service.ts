@@ -1,9 +1,12 @@
-import { catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+
+// third-party
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+// project
 import { Interest } from 'src/app/core/models/interest.model';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -25,11 +28,11 @@ export class InterestService {
         `${this.API_URL}auth/customer/mortgage/interestreceive?mortgageId=${mortgageId}`,
         { ...interest }
       )
-      .pipe(
+      /* .pipe(
         catchError((err) => {
           return Observable.throw(err);
         })
-      );
+      ); */
   }
 
   getTotalInterest(mortgageId: number): any {

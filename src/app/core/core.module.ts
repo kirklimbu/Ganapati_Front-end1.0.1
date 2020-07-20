@@ -1,3 +1,4 @@
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from './../shared/material/material/material.module';
 import { CommonModule } from '@angular/common';
@@ -18,34 +19,23 @@ const DECLATATIONS: any[] = [
   NavbarComponent,
   SidenavComponent,
   PageNotFoundComponent,
-]
+];
 @NgModule({
-  declarations: [
-    ...DECLATATIONS
-
-  ],
-  imports: [
-    CommonModule,
-    MaterialModule,
-    RouterModule,
-    
-  ],
-  exports: [
-    ...DECLATATIONS
-  ],
+  declarations: [...DECLATATIONS],
+  imports: [CommonModule, MaterialModule, RouterModule, FlexLayoutModule],
+  exports: [...DECLATATIONS],
   providers: [
     AuthGuardService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpTokenInterceptor,
-      multi: true
+      multi: true,
     },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
-      multi: true
+      multi: true,
     },
-
-  ]
+  ],
 })
-export class CoreModule { }
+export class CoreModule {}

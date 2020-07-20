@@ -83,20 +83,27 @@ export class MortgageDetailService {
       .get(
         `${this.API_URL}auth/customer/mortgagedetail/editform?mortgageDetailId=${id}`
       )
-      .pipe(
+      /* .pipe(
         retry(2),
         catchError((err) => {
           return Observable.throw(err);
         })
-      );
+      ); */
   }
 
-  saveMortgageDetailEdit( mortgageDetail: MortgageDetail): any {
+  saveMortgageDetailEdit(mortgageDetail: MortgageDetail): any {
     console.log('save mortgae detail edit ' + JSON.stringify(mortgageDetail));
 
     return this.http.post(
       `${this.API_URL}auth/customer/mortgagedetail/edit?rate=${mortgageDetail.rate}`,
       { ...mortgageDetail }
+    );
+  }
+
+  deleteMortgageDetail(mortgageDetailId) {
+    console.log('delete mortgage detail service calling..');
+    return this.http.delete(
+      `${this.API_URL}auth/customer/mortgagedetail/${mortgageDetailId}`
     );
   }
 }

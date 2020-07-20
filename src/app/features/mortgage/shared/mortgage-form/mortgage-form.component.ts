@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Customer } from './../../../../core/models/customer.model';
 import { CustomerService } from './../../../customer/services/customer.service';
 import { Mortgage } from './../../../../core/models/mortgage.model';
@@ -23,7 +24,8 @@ export class MortgageFormComponent implements OnInit {
     private mortgageService: MortgageService,
     private customerService: CustomerService,
     private route: ActivatedRoute,
-    private router: Router // private toastr: NgxToastrS,
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -42,7 +44,6 @@ export class MortgageFormComponent implements OnInit {
   fetchCustomerDetail() {
     this.customerService.getCustomerById().subscribe((res) => {
       this.customers = res.filter((f) => f.customerid === this.customerId);
-      // console.log('filter customer data ' + JSON.stringify(this.customer));
     });
   }
 
@@ -134,27 +135,27 @@ export class MortgageFormComponent implements OnInit {
   }
 
   onSave() {
-    // get customerId from URL
-
     this.mortgageService
       .addMortgage(this.customerId, this.mortgageForm.value)
       .subscribe(
         (response) => {
           console.log('inside new mortgage' + response);
-          // msg via toastr
+          this.toastr.success('New Mortgage added successfuly.');
           this.router.navigate(['/ganapati/mortgage'], {
             queryParams: { customerid: this.customerId },
           });
         },
-        (error) => {
-          console.log('error inside new mortgage ' + error);
-          // msg via toastr
+        (err) => {
+          if (err.error.errors[0].defaultMessage) {
+            this.toastr.error(err.error.errors[0].defaultMessage);
+          } else {
+            this.toastr.error('Error adding new mortgage.');
+          }
         }
       );
   }
 
   onCancel() {
-    console.log('cancel triggered mortgge form');
     this.router.navigate(['/ganapati/customer']);
   }
 }
