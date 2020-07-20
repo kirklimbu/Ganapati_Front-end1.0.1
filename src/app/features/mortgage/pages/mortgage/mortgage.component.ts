@@ -6,6 +6,7 @@ import { MortgageService } from '../../services/mortgage.service';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CustomerService } from 'src/app/features/customer/services/customer.service';
+import { DeletePopupComponent } from 'src/app/shared/components/delete-popup/delete-popup.component';
 
 @Component({
   selector: 'app-mortgage',
@@ -48,7 +49,7 @@ export class MortgageComponent implements OnInit {
       );
     });
   }
-  
+
 // similar to getCustomerById
   fetchCustomerDetail() {
     this.customerService.getCustomerById().subscribe((res) => {
@@ -77,8 +78,8 @@ export class MortgageComponent implements OnInit {
          */
       },
       // disableClose: true,
-      width: '400px',
-      height: '500px',
+      width: '500px',
+      height: '600px',
     });
 
     // after modal close
@@ -100,7 +101,45 @@ export class MortgageComponent implements OnInit {
 
   refreshTable() {}
 
-  onDelete() {}
+  onDelete(mortgage) {
+
+    console.log('mortgage ddelete triggered for: ' + JSON.stringify(mortgage));
+
+    const dialogRef = this.dialog.open(DeletePopupComponent, {
+      data: {},
+      disableClose: true,
+      /* width: '400px',
+      height: '500px', */
+    });
+    // after modal close
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('result of first modal ' + result);
+
+      if (result === 1) {
+        const idx = mortgage.trackerModelDtoList.indexOf(result);
+        const sub = this.mortgageService
+          .deleteMortgage(mortgage.mortgageId)
+
+          // .pipe(finalize(()=>this.spinner.hide()))
+          .subscribe(
+            (data) => {
+              mortgage.trackerModelDtoList[idx] = data; // or simply data
+              // this.toastr.success('Customer successfully deleted.');
+              mortgage.trackerModelDtoList.splice(idx, 1);
+              mortgage.showCancel = false;
+              sub.unsubscribe();
+            },
+            (err) => {
+              // this.toastr.error('Error removing customer.');
+              sub.unsubscribe();
+            }
+          );
+
+        // And lastly refresh table
+        this.refreshTable();
+      }
+    });
+  }
 
   showDetails(mortgageId: number, customerId?: number) {
     customerId = this.id;

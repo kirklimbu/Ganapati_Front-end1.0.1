@@ -149,5 +149,12 @@ export class EditMortgageComponent implements OnInit {
     );
   }
 
-  onCancel() {}
+  onCancel(id?) {
+    console.log('cancel triggered for edit mortgaege');
+
+    this.router.navigate(['/ganapati/mortgage'], {
+      // queryParams: { customerid: id },
+    });
+
+  }
 }

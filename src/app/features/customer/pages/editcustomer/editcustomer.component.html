@@ -1,16 +1,29 @@
 <!-- customer edit modal -->
-<h2 mat-dialog-title>Edit Customer</h2>
+<h2 mat-dialog-title align="center">Edit Customer</h2>
 <mat-divider class="mb-3"></mat-divider>
 <mat-dialog-content class="mat-typography">
-  <form [formGroup]="editCustomerForm" autocomplete="off" novalidate fxLayout="column wrap"
-    fxLayoutAlign="center center" fxLayoutGap="10px">
+  <form
+    [formGroup]="editCustomerForm"
+    autocomplete="off"
+    novalidate
+    fxLayout="column wrap"
+    fxLayoutAlign="center center"
+    fxLayoutGap="10px"
+  >
     <!-- first name -->
     <div class="row">
       <div class="col-md-12 col-sm-6 mx-auto">
         <mat-form-field class="example-full-width">
-          <input matInput type="text" placeholder="First name" formControlName="fname" id="fname" />
+          <input
+            matInput
+            type="text"
+            placeholder="First name"
+            formControlName="fname"
+            id="fname"
+          />
           <mat-hint align="end">Enter customer's first name</mat-hint>
-          <mat-error *ngIf="editCustomerForm.controls['fname'].invalid">{{ getFirstNameErrorMessage() }}
+          <mat-error *ngIf="editCustomerForm.controls['fname'].invalid"
+            >{{ getFirstNameErrorMessage() }}
           </mat-error>
         </mat-form-field>
       </div>
@@ -18,12 +31,19 @@
 
     <!-- last name -->
     <div class="row">
-      <div class=" col-md-12 col-sm-6 mx-auto">
+      <div class="col-md-12 col-sm-6 mx-auto">
         <mat-form-field class="example-full-width">
-          <input matInput type="text" placeholder="Last name" formControlName="lname" id="lname"
-            fxlayoutalign="column" />
+          <input
+            matInput
+            type="text"
+            placeholder="Last name"
+            formControlName="lname"
+            id="lname"
+            fxlayoutalign="column"
+          />
           <mat-hint align="end">Enter customer's last name</mat-hint>
-          <mat-error *ngIf="editCustomerForm.controls['lname'].invalid">{{ getLastNameErrorMessage() }}
+          <mat-error *ngIf="editCustomerForm.controls['lname'].invalid"
+            >{{ getLastNameErrorMessage() }}
           </mat-error>
         </mat-form-field>
       </div>
@@ -33,9 +53,15 @@
     <div class="row">
       <div class="col-md-12 col-sm-6 mx-auto">
         <mat-form-field class="example-full-width">
-          <input matInput type="text" placeholder="Address" formControlName="address" />
+          <input
+            matInput
+            type="text"
+            placeholder="Address"
+            formControlName="address"
+          />
           <mat-hint align="end">Enter customer's address</mat-hint>
-          <mat-error *ngIf="editCustomerForm.controls['address'].invalid">{{ getAddressErrorMessage() }}
+          <mat-error *ngIf="editCustomerForm.controls['address'].invalid"
+            >{{ getAddressErrorMessage() }}
           </mat-error>
         </mat-form-field>
       </div>
@@ -45,23 +71,25 @@
     <div class="row">
       <div class="col-md-12 col-sm-6 mx-auto">
         <mat-form-field class="example-full-width" align="center">
-          <input matInput type="number" placeholder="Mobile number" formControlName="mobile" />
+          <input
+            matInput
+            type="number"
+            placeholder="Mobile number"
+            formControlName="mobile"
+          />
           <mat-hint align="end">Enter customer's mobile number</mat-hint>
-          <mat-error *ngIf="editCustomerForm.controls['mobile'].invalid">{{ getMobileErrorMessage() }}</mat-error>
+          <mat-error *ngIf="editCustomerForm.controls['mobile'].invalid">{{
+            getMobileErrorMessage()
+          }}</mat-error>
         </mat-form-field>
       </div>
     </div>
 
-    <mat-divider class=" mt-5"></mat-divider>
+    <mat-divider class="mt-5 mb-3"></mat-divider>
     <!-- save/cancel buttons -->
     <mat-card-actions>
-
       <ganapati-save-cancel-buttons (save)="onSave()" (cancel)="onCancel()">
-
       </ganapati-save-cancel-buttons>
-
-       <!-- <button mat-raised-button color="primary" [mat-dialog-close]='1' (click)="onSave()">Save</button>
-      <button mat-raised-button color="secondary" [mat-dialog-close]='0' class="m-3" (click)="onCancel()">Cancel</button> -->
     </mat-card-actions>
   </form>
 </mat-dialog-content>

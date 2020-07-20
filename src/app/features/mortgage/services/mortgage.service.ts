@@ -63,8 +63,26 @@ export class MortgageService {
   }
 
   saveEditedMortgage(mortgage: Mortgage): any {
-    return this.http.post(`${this.API_URL}auth/customer/mortgage/edit`, {
-      ...mortgage,
-    });
+    return this.http
+      .post(`${this.API_URL}auth/customer/mortgage/edit`, {
+        ...mortgage,
+      })
+      .pipe(
+        catchError((err) => {
+          return Observable.throw(err);
+        })
+      );
+  }
+
+  deleteMortgage(mortgageId: number): any {
+    console.log('delte mortgage service calling.... ');
+
+    return this.http
+      .delete(`${this.API_URL}auth/customer/mortgage/delete/${mortgageId}`)
+      .pipe(
+        catchError((err) => {
+          return Observable.throw(err);
+        })
+      );
   }
 }

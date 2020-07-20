@@ -72,6 +72,27 @@ export class MortgageDetailFormComponent implements OnInit {
     });
   }
 
+  getAmountErrorMessage() {
+    return this.motrgageDetailForm.controls['amount'].hasError('required')
+      ? 'Amount is required.'
+      : '';
+  }
+getStatusErrorMessage() {
+    return this.motrgageDetailForm.controls['status'].hasError('required')
+      ? 'Status is required.'
+      : '';
+  }
+getRateErrorMessage() {
+    return this.motrgageDetailForm.controls['rate'].hasError('required')
+      ? 'Rate of interest is required.'
+      : '';
+  }
+getNepaliDateErrorMessage() {
+    return this.motrgageDetailForm.controls['nepDate'].hasError('required')
+      ? 'Nepali transaction date required.'
+      : '';
+  }
+
   onCancel() {
     console.log('cancel triggered');
 

@@ -130,7 +130,6 @@
             <div class="row">
               <div class="col-md-6 col-sm-6 mx-auto">
                 <mat-form-field class="example-full-width">
-                  <!--          <mat-label>Angular forms (w/ deserialization)</mat-label>-->
                   <mat-label>Date</mat-label>
                   <input
                     matInput
@@ -142,7 +141,7 @@
                     [for]="picker2"
                   ></mat-datepicker-toggle>
                   <mat-datepicker #picker2></mat-datepicker>
-                  <mat-hint align="end">Date of transaction.</mat-hint>
+                  <mat-hint align="end">Date of transaction.(B.S)</mat-hint>
                   <mat-error *ngIf="mortgageForm.controls['nepDate'].invalid">{{
                     getNepaliDateErrorMessage()
                   }}</mat-error>

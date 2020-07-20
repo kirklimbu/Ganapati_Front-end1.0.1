@@ -1,88 +1,79 @@
 <div class="body-content">
-    <div class="nav-bar-container">
-        <div class="nav-bar">
-            <!--  -->
-            <mat-toolbar class="expanded-toolbar">
-                <div>
-                    <button mat-icon-button fxShow="true">
-                        <mat-icon (click)="sidenav.toggle()">horizontal_split</mat-icon>
-                        <mat-icon *ngIf="!sidenav"> notes</mat-icon>
-    
-                    </button>
-                </div>
-                <span>
-                    <!-- <H2>{{ title }}</H2> -->
-                    <nav class="navbar">
-                        <span class="navbar-brand mb-0 h1" style="font-family: 'URW Gothic' "
-                            matTooltip="Craft of perfection"><img src="/assets/images/ohm.png" style="height: auto" />
-                           {{title}}|
-                        </span>
-                    </nav>
-                </span>
-            </mat-toolbar>
+  <div class="nav-bar-container">
+    <nav class="nav-bar">
+      <mat-toolbar class="expanded-toolbar">
+        <button mat-icon-button fxShow="true">
+          <mat-icon (click)="sidenav.toggle()">horizontal_split</mat-icon>
+          <mat-icon *ngIf="!sidenav"> notes</mat-icon>
+        </button>
+        <span
+          class="navbar-brand mb-0 h1"
+          style="font-family: 'URW Gothic';"
+          matTooltip="Craft of perfection"
+          ><img src="/assets/images/ohm.png" style="height: auto;" />
+          {{ title }}|
+        </span>
+        <!-- test -->
+        <div fxFlex fxLayout fxLayoutAlign="end">
+          <div
+            mat-card-avatar
+            class="example-header-image mr-4 mt-3"
+            [matMenuTriggerFor]="menu"
+          ></div>
+
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+              <mat-icon>person</mat-icon>
+              <span routerLink="/ganapati/profile">Profile</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>settings</mat-icon>
+              <span routerLink="/ganapati/profile/edit-profile">Account Setting</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>power_settings_new</mat-icon>
+              <span (click)="logout()">Log out</span>
+            </button>
+          </mat-menu>
         </div>
-    </div>
-    
-    <!-- side nav-bar -->
-    <mat-sidenav-container>
-        <mat-sidenav #sidenav position="start" mode="side" opened>
-            <mat-nav-list>
-                <mat-accordion class="example-headers-align " multi>
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
-    
-                            <mat-panel-title>
-                                <mat-icon>people</mat-icon> Customers
-                            </mat-panel-title>
-                        </mat-expansion-panel-header>
-    
-                        <mat-list>
-                            <div mat-subheader><a routerLink="customer">Customers List</a></div>
-    
-                            <mat-divider></mat-divider>
-                            <div mat-subheader><a routerLink="customer/add-customer">Add Customer</a></div>
-    
-                        </mat-list>
-                        <!-- <mat-action-row>
-                            <button mat-button color="primary">Next</button>
-                        </mat-action-row> -->
-                    </mat-expansion-panel>
-                </mat-accordion>
-                <mat-divider> </mat-divider>
-    
-                <mat-divider> </mat-divider>
-            </mat-nav-list>
-        </mat-sidenav>
-    
-        <mat-sidenav-content>
-            <div style="height: 93vh;">
-                <router-outlet></router-outlet>
-            </div>
-        </mat-sidenav-content>
-    </mat-sidenav-container>
-    
-    <!-- test -->
-    <div class="container" layout="row" layout-align="center" flex="70">
-        <nav class="navbar navbar-expand navbar-light bg-white" *ngIf="">
-            <nav class="navbar navbar-light">
-                <span class="navbar-brand mb-0 h1" style="font-family: 'URW Gothic' " matTooltip="Craft of perfection"><img
-                        src="assets/img/ohm.png" style="height: auto" /> Ganapati
-                    Jewellers|
-                </span>
-            </nav>
-            <mat-divider class="mat-divider-vertical"></mat-divider>
-            <div class="navbar-nav" style="font-family: Cantarell">
-                <a class="nav-item nav-link" routerLink="/customer/customerlist">Home</a>
-                <!--<a class="nav-item nav-link" routerLink="/customerlist" matTooltip="show total number customers "
-              >Customer lists
-            </a>-->
-                <a class="nav-item nav-link" routerLink="/mortgage/mortgage-detail"
-                    matTooltip="show list of mortgage details">Mortgage Details list</a>
-                <a matTooltip="Logout from this app" class="nav-item nav-link " routerLinkActive="active"
-                    (click)="logout()">Logout</a>
-                <!--    {{date | date}}-->
-            </div>
-        </nav>
-        <mat-divider style="width: available"></mat-divider>
-    </div>
+      </mat-toolbar>
+    </nav>
+  </div>
+
+  <!-- side nav-bar -->
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav position="start" mode="side" opened>
+      <mat-nav-list>
+        <mat-accordion class="example-headers-align" multi>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>people</mat-icon> Customers
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <mat-list>
+              <div mat-subheader>
+                <a routerLink="customer">Customers List</a>
+              </div>
+
+              <mat-divider></mat-divider>
+              <div mat-subheader>
+                <a routerLink="customer/add-customer">Add Customer</a>
+              </div>
+            </mat-list>
+          </mat-expansion-panel>
+        </mat-accordion>
+        <mat-divider> </mat-divider>
+
+        <mat-divider> </mat-divider>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <div style="height: 93vh;">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>

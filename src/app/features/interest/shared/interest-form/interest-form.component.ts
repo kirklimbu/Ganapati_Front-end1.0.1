@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Customer } from './../../../../core/models/customer.model';
 import { CustomerService } from './../../../customer/services/customer.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -5,6 +6,7 @@ import { InterestService } from './../../service/interest.service';
 import { Interest } from './../../../../core/models/interest.model';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-interest-form',
@@ -23,6 +25,7 @@ export class InterestFormComponent implements OnInit {
     private fb: FormBuilder,
     private interestService: InterestService,
     private customerService: CustomerService,
+    private toastr: ToastrService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -74,14 +77,21 @@ export class InterestFormComponent implements OnInit {
     if (this.interestForm.valid) {
       this.interestService
         .saveInterest(this.mortgageId, this.interestForm.value)
-        .subscribe((res) => {
-          console.log('interest saved' + JSON.stringify(res));
-          this.router.navigate(['/ganapati/interest'], {
-            queryParams: {
-              mortgageId: this.mortgageId,
-            },
-          });
-        });
+        .subscribe(
+          (res) => {
+            this.toastr.success('Interest data added successfully.');
+            console.log('interest saved' + JSON.stringify(res));
+            this.router.navigate(['/ganapati/interest'], {
+              queryParams: {
+                mortgageId: this.mortgageId,
+              },
+            });
+          },
+          (err) => {
+            console.log('inside interest error' + err);
+            this.toastr.error(err.error.message);
+          }
+        );
     } else {
     }
   }

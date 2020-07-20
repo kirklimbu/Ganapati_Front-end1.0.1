@@ -8,14 +8,17 @@
         fxFlex.xs="100%"
         class="mortgagedetail-card mt-4 mb-4"
       >
-          <mat-card-title align='center'>Mortgages information: </mat-card-title>
-          <mat-card-subtitle *ngFor="let customer of customers" align="center">
-            <strong class="mt-2"
-              >Customer: <u style="color: rgb(65, 65, 156);">{{ customer.fname | titlecase }}
-              {{ customer.lname | titlecase }}</u> mortgage list.</strong
+        <mat-card-title align="center">Mortgages information: </mat-card-title>
+        <mat-card-subtitle *ngFor="let customer of customers" align="center"
+          >Customer:
+          <strong class="mt-2">
+            <u style="color: rgb(65, 65, 156);"
+              >{{ customer.fname | titlecase }}
+              {{ customer.lname | titlecase }}</u
             >
-          </mat-card-subtitle>
-          <mat-divider></mat-divider>
+          </strong>
+        </mat-card-subtitle>
+        <mat-divider></mat-divider>
 
         <!--  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">-->
         <mat-card-content>
@@ -26,19 +29,11 @@
                 <ganapati-action-buttons
                   (add)="onAdd(mortgage.mortgageId, id)"
                   (edit)="onEdit()"
-                  (delete)="onDelete()"
+                  (delete)="onDelete(mortgage)"
                 ></ganapati-action-buttons>
               </h4>
 
-              <!--<div>
-          <a
-            [routerLink]="['/createmortgagedetail']"
-            mat-stroked-button
-            color="primar"
-            class="mt-3 mb-3"
-          >Add Mortgage Detail: <mat-icon align="center">add</mat-icon></a
-          >
-        </div>    -->
+
               <h4
                 mat-line
                 style="cursor: pointer;"

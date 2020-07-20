@@ -9,75 +9,62 @@ import { Customer } from 'src/app/core/models/customer.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CustomerService {
-
   // props
   API_URL = environment.apiUrl;
   dialogData: any;
   dataChange: BehaviorSubject<Customer[]> = new BehaviorSubject<Customer[]>([]);
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
 
   addCustomer(customer: Customer): any {
-
     console.log('calling add service');
 
-    return (this.http
-      .post<Customer>(
-        `${this.API_URL}auth/customer/create`,
-        { ...customer },
-      )
-      .pipe(retry(2),
-        catchError(err => {
-          return Observable.throw(err)
+    return this.http
+      .post<Customer>(`${this.API_URL}auth/customer/create`, { ...customer })
+      .pipe(
+        retry(2),
+        catchError((err) => {
+          return Observable.throw(err);
         })
-      ));
+      );
   }
 
   getCustomers(): any {
-    return (
-      this.http
-        .get(`${environment.apiUrl}auth/customer`
-        )
-        .pipe(retry(2),
-          catchError(err => {
-            return Observable.throw(err)
-          }))
-    )
+    return this.http.get(`${environment.apiUrl}auth/customer`).pipe(
+      retry(2),
+      catchError((err) => {
+        return Observable.throw(err);
+      })
+    );
   }
 
-  getCustomerById():any{
-    return (
-      this.http
-        .get(`${environment.apiUrl}auth/customer`
-        )
-        .pipe(retry(2),
-          catchError(err => {
-            return Observable.throw(err)
-          }))
-    )
+  getCustomerById(): any {
+    return this.http.get(`${environment.apiUrl}auth/customer`).pipe(
+      retry(2),
+      catchError((err) => {
+        return Observable.throw(err);
+      })
+    );
   }
 
   // edit
   updateCustomer(customer: Customer): Observable<any> {
-
     console.log('customer values ' + JSON.stringify(customer));
-
     return this.http
       .post(
         // `${environment.apiUrl}auth/customer/editform?customerid=${customer.customerid}`, //edit garne yo part
         `${environment.apiUrl}auth/customer/edit`, //edit garne yo part
-        { ...customer },
-        // this.httpOptions
+        { ...customer }
       )
-      .pipe(retry(2),
-        catchError(err => {
-          return Observable.throw(err)
-        }));
+      .pipe(
+        retry(2),
+        catchError((err) => {
+          return Observable.throw(err);
+        })
+      );
   }
 
   getDialogData() {
@@ -85,11 +72,12 @@ export class CustomerService {
   }
 
   deleteCustomer(customerId): any {
-    console.log('delete service calling..');
-    return (this.http.delete(`${this.API_URL}/trackermodel/${customerId}`)
-    )
-    // this.http.delete()
-
+    console.log('delete customer service calling..');
+    return this.http.delete(`${this.API_URL}auth/customer/${customerId}`).pipe(
+      retry(2),
+      catchError((err) => {
+        return Observable.throw(err);
+      })
+    );
   }
-
 }

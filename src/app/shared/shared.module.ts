@@ -1,6 +1,8 @@
 
+// angular
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { NgModule } from '@angular/core';
 // third-party
@@ -8,7 +10,8 @@ import { NgModule } from '@angular/core';
 import { BreadcrumbModule } from 'angular-crumbs';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+
 // project
 import { MaterialModule } from './material/material/material.module';
 import { ActionButtonsComponent } from './components/action-buttons/action-buttons.component';
@@ -48,8 +51,19 @@ const DECLARATIONS: any[] =
     ReactiveFormsModule,
     RouterModule,
     BreadcrumbModule,
-    FormsModule
-    // NgxSpinnerModule
+    FormsModule,
+    // NgxSpinnerModule,
+
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+      autoDismiss: true,
+      closeButton: true,
+      progressBar: true,
+      progressAnimation:'increasing'
+
+    }),
   ],
   exports: [
     MaterialModule,

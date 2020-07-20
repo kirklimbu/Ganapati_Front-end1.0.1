@@ -12,9 +12,7 @@ const routes: Routes = [
         path: 'home',
         loadChildren: () =>
           import('./../home/home.module').then((m) => m.HomeModule),
-        data: {
-
-        },
+        data: {},
       },
       {
         path: 'customer',
@@ -39,7 +37,7 @@ const routes: Routes = [
             (m) => m.MortgageDetailsModule
           ),
         data: {
-          breadcrumb: 'Mortgage-detail list' ,
+          breadcrumb: 'Mortgage-detail list',
         },
       },
       {
@@ -49,6 +47,34 @@ const routes: Routes = [
         data: {
           breadcrumb: 'Interest ',
         },
+      },
+      {
+        path: 'profile',
+        loadChildren: () =>
+          import('./../profile/profile.module').then((m) => m.ProfileModule),
+        data: {
+          breadcrumb: 'Profile ',
+        },
+      },
+      {
+        path: 'page-not-found',
+        loadChildren: () =>
+          import('./../page-not-found/page-not-found.module').then(
+            (m) => m.PageNotFoundModule
+          ),
+        /* data: {
+          breadcrumb: 'Interest ',
+        }, */
+      },
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'page-not-found',
+      },
+      {
+        path: '**',
+        pathMatch: 'full',
+        redirectTo: 'page-not-found',
       },
 
       // {

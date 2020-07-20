@@ -1,0 +1,76 @@
+<div class="content-wrapper">
+  <!-- breadcrumb -->
+  <ganapati-breadcrumb></ganapati-breadcrumb>
+  <div id="interestForm-card">
+    <section fxLayout="row wrap" fxLayoutAlign="center center">
+      <mat-card fxFlex="500px" fxFlex.xs="100%" class="mt-4">
+        <mat-card-title align="center">Edit profile </mat-card-title>
+        <mat-divider></mat-divider>
+        <form
+          [formGroup]="profileEditForm"
+          autocomplete="off"
+          novalidate
+          fxLayout="column wrap"
+          fxLayoutAlign="center center"
+          fxLayoutGap="10px"
+        >
+          <mat-card-content>
+            <!-- current password -->
+            <div class="row">
+              <div class="col-md-6 col-sm-6 mx-auto mt-3">
+                <mat-form-field class="example-full-width">
+                  <input
+                    matInput
+                    type="password"
+                    placeholder="Current Password"
+                    formControlName="currentPassword"
+                    id="currentPassword"
+                    required
+                  />
+                  <mat-hint align="end"> Enter current password.</mat-hint>
+                  <mat-error *ngIf="currentPassErrorMessage.invalid">{{
+                    getCurrentPassErrorMessage()
+                  }}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <!-- new password -->
+            <div class="row">
+              <div class="col-md-6 col-sm-6 mx-auto mb-3">
+                <mat-form-field class="example-full-width">
+                  <input
+                    matInput
+                    type="password"
+                    placeholder="New password"
+                    formControlName="newPassword"
+                    id="newPassword"
+                    required
+                  />
+                  <mat-hint align="end">Enter new password.</mat-hint>
+                  <mat-error
+                    *ngIf="profileEditForm.controls['newPassword'].invalid"
+                    >{{ getNewPassErrorMessage() }}</mat-error
+                  >
+                </mat-form-field>
+              </div>
+            </div>
+
+            <mat-divider></mat-divider>
+          </mat-card-content>
+          <!-- save/cancel -->
+          <div class="row">
+            <div class="col-md-9 col-sm-6">
+              <mat-card-actions align="center">
+                <ganapati-save-cancel-buttons
+                  (save)="onSave()"
+                  (cancel)="onCancel()"
+                >
+                </ganapati-save-cancel-buttons>
+              </mat-card-actions>
+            </div>
+          </div>
+        </form>
+      </mat-card>
+    </section>
+  </div>
+</div>
