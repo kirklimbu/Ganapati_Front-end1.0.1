@@ -12,6 +12,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { EditcustomerComponent } from '../editcustomer/editcustomer.component';
 import { finalize } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-customer',
@@ -44,7 +45,8 @@ export class CustomerComponent implements OnInit {
     public dialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute,
-    private toastr: ToastrService // private spinner:NgxspinnerService
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit() {
@@ -52,18 +54,21 @@ export class CustomerComponent implements OnInit {
   }
 
   fetchCustomers() {
-    this.customerService.getCustomers().subscribe(
-      (data) => {
-        console.log('customer list ' + JSON.stringify(data));
-
-        this.customerListTableDataSource = new MatTableDataSource(data);
-        this.customerListTableDataSource.paginator = this.paginator;
-        this.customerListTableDataSource.sort = this.sort;
-      },
-      (error) => {
-        this.toastr.error(error);
-      }
-    );
+    this.spinner.show();
+    this.customerService
+      .getCustomers()
+      .pipe(finalize(() => this.spinner.hide()))
+      .subscribe(
+        (data) => {
+          console.log('customer list ' + JSON.stringify(data));
+          this.customerListTableDataSource = new MatTableDataSource(data);
+          this.customerListTableDataSource.paginator = this.paginator;
+          this.customerListTableDataSource.sort = this.sort;
+        },
+        (error) => {
+          this.toastr.error(error);
+        }
+      );
   }
 
   onEdit(

@@ -1,4 +1,4 @@
-
+import { NgxSpinnerModule } from 'ngx-spinner';
 // angular
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -23,26 +23,22 @@ import { PageHeaderComponent } from './components/page-header/page-header.compon
 import { TableTopBarComponent } from './components/table-top-bar/table-top-bar.component';
 import { SaveCancelButtonsComponent } from './components/save-cancel-buttons/save-cancel-buttons.component';
 import { TestModalComponent } from './components/test-modal/test-modal.component';
+import { NgxSpinnerComponent } from './components/ngx-spinner/ngx-spinner.component';
 
-const DECLARATIONS: any[] =
-  [
-    FormGroupComponent,
-    ActionButtonsComponent,
-    BreadcrumbComponent,
-    DeletePopupComponent,
-    ListPageTemplateComponent,
-    SaveCancelButtonsComponent,
-    TableTopBarComponent,
-    PageHeaderComponent,
-    TestModalComponent,
-
-
-  ]
+const DECLARATIONS: any[] = [
+  FormGroupComponent,
+  ActionButtonsComponent,
+  BreadcrumbComponent,
+  DeletePopupComponent,
+  ListPageTemplateComponent,
+  SaveCancelButtonsComponent,
+  TableTopBarComponent,
+  PageHeaderComponent,
+  TestModalComponent,
+  NgxSpinnerComponent,
+];
 @NgModule({
-  declarations: [
-    ...DECLARATIONS,
-
-  ],
+  declarations: [...DECLARATIONS],
   imports: [
     CommonModule,
     MaterialModule,
@@ -52,7 +48,7 @@ const DECLARATIONS: any[] =
     RouterModule,
     BreadcrumbModule,
     FormsModule,
-    // NgxSpinnerModule,
+    NgxSpinnerModule,
 
     ToastrModule.forRoot({
       timeOut: 5000,
@@ -61,15 +57,18 @@ const DECLARATIONS: any[] =
       autoDismiss: true,
       closeButton: true,
       progressBar: true,
-      progressAnimation:'increasing'
-
+      progressAnimation: 'increasing',
     }),
   ],
   exports: [
+    BreadcrumbModule,
     MaterialModule,
     NgbModule,
-    BreadcrumbModule,
-    ...DECLARATIONS
-  ]
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgxSpinnerModule,
+    ...DECLARATIONS,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

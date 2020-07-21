@@ -13,6 +13,11 @@
           ><img src="/assets/images/ohm.png" style="height: auto;" />
           {{ title }}|
         </span>
+
+        <span fxFlex fxLayout fxLayoutAlign="end" class="mt-3" style="font-family: serif;">
+          <mat-icon class="mt-1" color="primary">watch_later</mat-icon>
+          {{ currentTime | date: "yyyy/MM/dd ' ,' HH:mm:ss" }}
+        </span>
         <!-- test -->
         <div fxFlex fxLayout fxLayoutAlign="end">
           <div

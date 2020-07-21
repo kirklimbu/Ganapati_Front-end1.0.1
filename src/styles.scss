@@ -127,7 +127,7 @@ mat-sidenav {
   color: red;
 }
 
-#interestForm-card{
+#interestForm-card {
   margin-left: 300px;
   margin-right: 350px;
   height: 350px;
@@ -135,7 +135,7 @@ mat-sidenav {
 }
 
 /* Error 404 */
-.error-404{
+.error-404 {
   position: relative;
   display: flex;
   justify-content: center;
@@ -146,33 +146,33 @@ mat-sidenav {
   z-index: 2;
 }
 .error-404::before,
-.lock-screen::before{
-  content: '';
+.lock-screen::before {
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #ff00009e;
+  background-color: coral;
   z-index: -1;
 }
-.error-404 .content-wrapper{
+.error-404 .content-wrapper {
   text-align: center;
 }
-.error-404 .content-wrapper i::before{
+.error-404 .content-wrapper i::before {
   font-size: 8rem;
 }
-.error-404 .content-wrapper a i{
+.error-404 .content-wrapper a i {
   margin-right: 5px;
 }
-.error-404 .content-wrapper h3{
+.error-404 .content-wrapper h3 {
   font-size: 24px;
   font-weight: 400;
 }
 .error-404 .content-wrapper h1,
 .error-404 .content-wrapper h3,
 .error-404 .content-wrapper p,
-.error-404 .content-wrapper i::before{
+.error-404 .content-wrapper i::before {
   color: #fff;
   margin-bottom: 1rem;
 }
