@@ -18,6 +18,7 @@ export class MortgageFormComponent implements OnInit {
   mortgage: Mortgage = new Mortgage();
   customers: Customer = new Customer();
   customerId: number;
+  formSubmitted=false;
 
   constructor(
     private fb: FormBuilder,
@@ -81,6 +82,34 @@ export class MortgageFormComponent implements OnInit {
     });
   }
 
+
+
+  onSave() {
+    this.formSubmitted= true;
+    if (this.mortgageForm.valid) {
+      this.mortgageService
+      .addMortgage(this.customerId, this.mortgageForm.value)
+      .subscribe(
+        (response) => {
+          console.log('inside new mortgage' + response);
+          this.toastr.success('New Mortgage added successfuly.');
+          this.router.navigate(['/ganapati/mortgage'], {
+            queryParams: { customerid: this.customerId },
+          });
+        },
+        (err) => {
+          err = err.error.message
+            ? this.toastr.error(err.error.message)
+            : this.toastr.error('Error adding new mortgage.');
+        }
+      );
+    }
+
+  }
+
+  onCancel() {
+    this.router.navigate(['/ganapati/customer']);
+  }
   // error message block
   getQuantityErrorMessage() {
     return this.mortgageForm.controls['qty'].hasError('required')
@@ -132,30 +161,5 @@ export class MortgageFormComponent implements OnInit {
     return this.mortgageForm.controls['nepDate'].hasError('required')
       ? 'Nepali transaction date required.'
       : '';
-  }
-
-  onSave() {
-    this.mortgageService
-      .addMortgage(this.customerId, this.mortgageForm.value)
-      .subscribe(
-        (response) => {
-          console.log('inside new mortgage' + response);
-          this.toastr.success('New Mortgage added successfuly.');
-          this.router.navigate(['/ganapati/mortgage'], {
-            queryParams: { customerid: this.customerId },
-          });
-        },
-        (err) => {
-          if (err.error.errors[0].defaultMessage) {
-            this.toastr.error(err.error.errors[0].defaultMessage);
-          } else {
-            this.toastr.error('Error adding new mortgage.');
-          }
-        }
-      );
-  }
-
-  onCancel() {
-    this.router.navigate(['/ganapati/customer']);
   }
 }

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { retry, catchError } from 'rxjs/operators';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, throwError, pipe } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +27,7 @@ export class MortgageDetailService {
       .pipe(
         retry(2),
         catchError((err) => {
-          return Observable.throw(err);
+          return throwError(err);
         })
       );
   }
@@ -44,12 +44,11 @@ export class MortgageDetailService {
       .post(
         `${this.API_URL}auth/customer/mortgagedetail/create?mortgageId=${mortgageId}&rate=${body.rate}`,
         { ...body }
-        // this.httpOptions
       )
       .pipe(
         retry(2),
         catchError((err) => {
-          return Observable.throw(err);
+          return throwError(err);
         })
       );
 
@@ -83,27 +82,39 @@ export class MortgageDetailService {
       .get(
         `${this.API_URL}auth/customer/mortgagedetail/editform?mortgageDetailId=${id}`
       )
-      /* .pipe(
+      .pipe(
         retry(2),
         catchError((err) => {
-          return Observable.throw(err);
+          return throwError(err);
         })
-      ); */
+      );
   }
 
   saveMortgageDetailEdit(mortgageDetail: MortgageDetail): any {
     console.log('save mortgae detail edit ' + JSON.stringify(mortgageDetail));
 
-    return this.http.post(
-      `${this.API_URL}auth/customer/mortgagedetail/edit?rate=${mortgageDetail.rate}`,
-      { ...mortgageDetail }
-    );
+    return this.http
+      .post(
+        `${this.API_URL}auth/customer/mortgagedetail/edit?rate=${mortgageDetail.rate}`,
+        { ...mortgageDetail }
+      )
+      .pipe(
+        retry(2),
+        catchError((err) => {
+          return throwError(err);
+        })
+      );
   }
 
   deleteMortgageDetail(mortgageDetailId) {
     console.log('delete mortgage detail service calling..');
-    return this.http.delete(
-      `${this.API_URL}auth/customer/mortgagedetail/${mortgageDetailId}`
-    );
+    return this.http
+      .delete(`${this.API_URL}auth/customer/mortgagedetail/${mortgageDetailId}`)
+      .pipe(
+        retry(2),
+        catchError((err) => {
+          return throwError(err);
+        })
+      );
   }
 }

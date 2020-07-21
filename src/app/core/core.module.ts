@@ -12,6 +12,7 @@ import { AuthGuardService } from './guards/auth/auth-guard.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpTokenInterceptor } from './http-interceptors/http-token/http-token-interceptor.interceptor';
 import { HttpErrorInterceptor } from './http-interceptors/http-error/http-error-interceptor.interceptor';
+import { AuthenticationService } from './guards/auth/authentication.service';
 
 const DECLATATIONS: any[] = [
   ContentWrapperComponent,
@@ -26,6 +27,7 @@ const DECLATATIONS: any[] = [
   exports: [...DECLATATIONS],
   providers: [
     AuthGuardService,
+    AuthenticationService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpTokenInterceptor,

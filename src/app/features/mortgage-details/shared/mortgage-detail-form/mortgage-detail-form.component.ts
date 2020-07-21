@@ -12,6 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 // project
 import { MortgageDetailService } from '../../services/mortgage-detail.service';
 import { MortgageDetail } from 'src/app/core/models/mortgage-detail.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-mortgage-detail-form',
@@ -20,6 +21,7 @@ import { MortgageDetail } from 'src/app/core/models/mortgage-detail.model';
 })
 export class MortgageDetailFormComponent implements OnInit {
   // props
+
   mortgageDetail: MortgageDetail = new MortgageDetail();
   customers: Customer = new Customer();
   motrgageDetailForm: FormGroup;
@@ -27,6 +29,7 @@ export class MortgageDetailFormComponent implements OnInit {
   customerId: number;
   selected: any;
   rate: number;
+  formSubmitted = false;
   date = new FormControl(new Date());
   serializedDate = new FormControl(new Date().toISOString());
 
@@ -35,7 +38,8 @@ export class MortgageDetailFormComponent implements OnInit {
     private mortgageDetailsService: MortgageDetailService,
     private customerService: CustomerService,
     private route: ActivatedRoute,
-    private router: Router // private toastrService: ToastrService
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
@@ -77,17 +81,17 @@ export class MortgageDetailFormComponent implements OnInit {
       ? 'Amount is required.'
       : '';
   }
-getStatusErrorMessage() {
+  getStatusErrorMessage() {
     return this.motrgageDetailForm.controls['status'].hasError('required')
       ? 'Status is required.'
       : '';
   }
-getRateErrorMessage() {
+  getRateErrorMessage() {
     return this.motrgageDetailForm.controls['rate'].hasError('required')
       ? 'Rate of interest is required.'
       : '';
   }
-getNepaliDateErrorMessage() {
+  getNepaliDateErrorMessage() {
     return this.motrgageDetailForm.controls['nepDate'].hasError('required')
       ? 'Nepali transaction date required.'
       : '';
@@ -104,30 +108,34 @@ getNepaliDateErrorMessage() {
   }
 
   createMortgageDetail(id, rate) {
+    this.formSubmitted = true;
     // this.rate = rate;
     id = this.mortgageId;
     console.log('rate & mId: ' + rate + this.mortgageId);
 
     rate = this.motrgageDetailForm.patchValue({});
-
-    this.mortgageDetailsService
-      .createNewMortgageDetail(id, this.rate, this.motrgageDetailForm.value)
-      .subscribe(
-        (response) => {
-          console.log(
-            'successful entry of mortgage detail ' + JSON.stringify(response)
-          );
-          // this.router.navigate(["/mortgage-detail"],{relativeTo: this.route}) //dynamic routing
-          this.router.navigate(['ganapati/mortgage-detail'], {
-            queryParams: {
-              mortgageId: this.mortgageId,
-              customerid: this.customerId,
-            }, //static routing
-          });
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+    if (this.motrgageDetailForm.valid) {
+      this.mortgageDetailsService
+        .createNewMortgageDetail(id, this.rate, this.motrgageDetailForm.value)
+        .subscribe(
+          (response) => {
+            console.log(
+              'successful entry of mortgage detail ' + JSON.stringify(response)
+            );
+            // this.router.navigate(["/mortgage-detail"],{relativeTo: this.route}) //dynamic routing
+            this.router.navigate(['ganapati/mortgage-detail'], {
+              queryParams: {
+                mortgageId: this.mortgageId,
+                customerid: this.customerId,
+              }, //static routing
+            });
+          },
+          (err) => {
+            err = err.error.message
+              ? this.toastr.error(err.error.message)
+              : this.toastr.error('Error add new mortgage detail.');
+          }
+        );
+    }
   }
 }

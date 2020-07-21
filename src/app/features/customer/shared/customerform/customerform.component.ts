@@ -17,11 +17,9 @@ export class CustomerformComponent implements OnInit {
   customer: Customer = new Customer();
 
   constructor(
-    private http: HttpClient,
     private customerService: CustomerService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute,
     private toastr: ToastrService
   ) {}
 
@@ -75,11 +73,9 @@ export class CustomerformComponent implements OnInit {
           );
         },
         (err) => {
-          if (err.error.errors[0].defaultMessage) {
-            this.toastr.error(err.error.errors[0].defaultMessage);
-          } else {
-            this.toastr.error('Error adding new customer.');
-          }
+          err = err.error.message
+            ? this.toastr.error(err.error.message)
+            : this.toastr.error('Error adding new customer.');
         }
       );
     }
@@ -91,7 +87,7 @@ export class CustomerformComponent implements OnInit {
       ? 'Customer first name is required.'
       : this.customerForm.controls['fname'].hasError('maxLength')
       ? 'Invalid first name.'
-      : this.customerForm.controls['fname'].hasError('minlength')
+      : this.customerForm.controls['fname'].hasError('minLength')
       ? 'First name must be atleast of 2 characters.'
       : '';
   }
@@ -101,7 +97,7 @@ export class CustomerformComponent implements OnInit {
       ? 'Customer last name is required.'
       : this.customerForm.controls['lname'].hasError('maxLength')
       ? 'Invalid Last name.'
-      : this.customerForm.controls['lname'].hasError('minlength')
+      : this.customerForm.controls['lname'].hasError('minLength')
       ? 'Last name must be atleast of 2 characters.'
       : '';
   }
@@ -110,7 +106,7 @@ export class CustomerformComponent implements OnInit {
       ? 'Customer mobile number is required.'
       : this.customerForm.controls['mobile'].hasError('pattern')
       ? 'Invalid mobile number.'
-      : // this.customerForm.controls['mobile'].hasError('minlength') ? 'Mobile number must be atleast of 10 characters.' :
+      : // this.customerForm.controls['mobile'].hasError('minLength') ? 'Mobile number must be atleast of 10 characters.' :
         '';
   }
   getAddressErrorMessage() {
@@ -118,7 +114,7 @@ export class CustomerformComponent implements OnInit {
       ? 'Customer Address is required.'
       : this.customerForm.controls['address'].hasError('maxLength')
       ? 'Invalid address.'
-      : this.customerForm.controls['address'].hasError('minlength')
+      : this.customerForm.controls['address'].hasError('minLength')
       ? 'address must be atleast of 2 characters.'
       : '';
   }

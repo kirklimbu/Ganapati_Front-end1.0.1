@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { Mortgage } from 'src/app/core/models/mortgage.model';
 
 @Injectable({
@@ -29,7 +29,7 @@ export class MortgageService {
       })
       .pipe(
         catchError((err) => {
-          return Observable.throw(err);
+          return throwError(err);
         })
       );
   }
@@ -41,7 +41,7 @@ export class MortgageService {
       .get(`${this.API_URL}auth/customer/mortgage?customerId=${id}`)
       .pipe(
         catchError((err) => {
-          return Observable.throw(err);
+          return throwError(err);
         })
       );
   }
@@ -57,7 +57,7 @@ export class MortgageService {
       )
       .pipe(
         catchError((err) => {
-          return Observable.throw(err);
+          return throwError(err);
         })
       );
   }
@@ -69,7 +69,7 @@ export class MortgageService {
       })
       .pipe(
         catchError((err) => {
-          return Observable.throw(err);
+          return throwError(err);
         })
       );
   }
@@ -81,7 +81,7 @@ export class MortgageService {
       .delete(`${this.API_URL}auth/customer/mortgage/delete/${mortgageId}`)
       .pipe(
         catchError((err) => {
-          return Observable.throw(err);
+          return throwError(err);
         })
       );
   }

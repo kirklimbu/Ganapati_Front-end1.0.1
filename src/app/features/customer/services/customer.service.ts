@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 // third-party
 import { retry, catchError } from 'rxjs/operators';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
 // project
 import { Customer } from 'src/app/core/models/customer.model';
 import { environment } from 'src/environments/environment';
@@ -27,7 +27,7 @@ export class CustomerService {
       .pipe(
         retry(2),
         catchError((err) => {
-          return Observable.throw(err);
+          return throwError(err);
         })
       );
   }
@@ -36,7 +36,7 @@ export class CustomerService {
     return this.http.get(`${environment.apiUrl}auth/customer`).pipe(
       retry(2),
       catchError((err) => {
-        return Observable.throw(err);
+        return throwError(err);
       })
     );
   }
@@ -45,7 +45,7 @@ export class CustomerService {
     return this.http.get(`${environment.apiUrl}auth/customer`).pipe(
       retry(2),
       catchError((err) => {
-        return Observable.throw(err);
+        return throwError(err);
       })
     );
   }
@@ -62,7 +62,7 @@ export class CustomerService {
       .pipe(
         retry(2),
         catchError((err) => {
-          return Observable.throw(err);
+          return throwError(err);
         })
       );
   }
@@ -76,7 +76,7 @@ export class CustomerService {
     return this.http.delete(`${this.API_URL}auth/customer/${customerId}`).pipe(
       retry(2),
       catchError((err) => {
-        return Observable.throw(err);
+        return throwError(err);
       })
     );
   }

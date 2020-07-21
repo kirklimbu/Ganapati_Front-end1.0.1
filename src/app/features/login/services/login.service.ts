@@ -19,7 +19,6 @@ export class LoginService {
   loading = false;
   constructor(
     private http: HttpClient,
-    private router: Router,
   ) { }
 
   getLogin(username, password): any {
