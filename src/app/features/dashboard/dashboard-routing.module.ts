@@ -69,7 +69,7 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'page-not-found',
+        redirectTo: 'customer', // change according to need
       },
       {
         path: '**',
