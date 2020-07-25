@@ -1,36 +1,32 @@
-<div class="d-flex  row">
-
-
+<div class="d-flex row">
   <div class="col-2">
     <button
-        mat-raised-button
-        ngbTooltip="Save"
-        (click)="onAdd()"
-        *ngIf="enableAdd"
-    >Create New
-  </button>
+      mat-raised-button
+      ngbTooltip="Save"
+      (click)="onAdd()"
+      *ngIf="enableAdd"
+    >
+      Create New
+    </button>
   </div>
-
 
   <!-- /add button -->
 
   <!-- search -->
 
-  <div
-      *ngIf="enableSearch"
-      class="d-flex ml-auto mb-2 mr-1">
-    <div
-        class="mr-1 search__container"
-        [class.search__container--expanded]="isSearchShowing">
-      <input
-          type="text"
-          class="form-control"
-          placeholder="Search..">
-    </div>
-    <button class="btn rounded-circle bg-blue text-white"
-            (click)="isSearchShowing = !isSearchShowing">
-      <i class="fas fa-search"></i>
-    </button>
+  <div *ngIf="enableSearch" class="d-flex ml-auto mr-3 mb-0"  align="end">
+    <mat-form-field floatLabel="never" align="end">
+      <input matInput type="text" placeholder="Search here..." />
+      <button
+        mat-button
+        mat-icon-button
+        matSuffix
+        aria-label="Clear"
+        (click)="isSearchShowing = !isSearchShowing"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
   </div>
 
   <!--/ search  -->

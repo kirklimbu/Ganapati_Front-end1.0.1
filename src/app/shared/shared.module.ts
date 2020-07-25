@@ -1,17 +1,14 @@
-import { NgxSpinnerModule } from 'ngx-spinner';
 // angular
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-
 import { NgModule } from '@angular/core';
 // third-party
-// import { NgxSpinnerModule } from "ngx-spinner";
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { BreadcrumbModule } from 'angular-crumbs';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
-
 // project
 import { MaterialModule } from './material/material/material.module';
 import { ActionButtonsComponent } from './components/action-buttons/action-buttons.component';
@@ -22,7 +19,6 @@ import { ListPageTemplateComponent } from './components/list-page-template/list-
 import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { TableTopBarComponent } from './components/table-top-bar/table-top-bar.component';
 import { SaveCancelButtonsComponent } from './components/save-cancel-buttons/save-cancel-buttons.component';
-import { TestModalComponent } from './components/test-modal/test-modal.component';
 import { NgxSpinnerComponent } from './components/ngx-spinner/ngx-spinner.component';
 
 const DECLARATIONS: any[] = [
@@ -34,7 +30,6 @@ const DECLARATIONS: any[] = [
   SaveCancelButtonsComponent,
   TableTopBarComponent,
   PageHeaderComponent,
-  TestModalComponent,
   NgxSpinnerComponent,
 ];
 @NgModule({

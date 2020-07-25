@@ -14,7 +14,13 @@
           {{ title }}|
         </span>
 
-        <span fxFlex fxLayout fxLayoutAlign="end" class="mt-3" style="font-family: serif;">
+        <span
+          fxFlex
+          fxLayout
+          fxLayoutAlign="end"
+          class="mt-3"
+          style="font-family: serif;"
+        >
           <mat-icon class="mt-1" color="primary">watch_later</mat-icon>
           {{ currentTime | date: "yyyy/MM/dd ' ,' HH:mm:ss" }}
         </span>
@@ -27,11 +33,19 @@
           ></div>
 
           <mat-menu #menu="matMenu">
-            <button mat-menu-item routerLink="/ganapati/profile">
+            <button
+              mat-menu-item
+              routerLinkActive="active"
+              routerLink="/ganapati/profile"
+            >
               <mat-icon>person</mat-icon>
               <span>Profile</span>
             </button>
-            <button mat-menu-item routerLink="/ganapati/profile/edit-profile">
+            <button
+              mat-menu-item
+              routerLinkActive="active"
+              routerLink="/ganapati/profile/edit-profile"
+            >
               <mat-icon>settings</mat-icon>
               <span>Account Setting</span>
             </button>
@@ -59,12 +73,16 @@
 
             <mat-list>
               <div mat-subheader>
-                <a routerLink="customer">Customers List</a>
+                <a routerlinkActive="active" routerLink="customer"
+                  >Customers List</a
+                >
               </div>
 
               <mat-divider></mat-divider>
               <div mat-subheader>
-                <a routerLink="customer/add-customer">Add Customer</a>
+                <a routerlinkActive="active" routerLink="customer/add-customer"
+                  >Add Customer</a
+                >
               </div>
             </mat-list>
           </mat-expansion-panel>
