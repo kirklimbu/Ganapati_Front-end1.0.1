@@ -1,18 +1,20 @@
 // angular
-import { DeletePopupComponent } from './../../../../shared/components/delete-popup/delete-popup.component';
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
+// third-party
 import { MatTableDataSource, MatTable } from '@angular/material/table';
-import { Customer } from 'src/app/core/models/customer.model';
+
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { CustomerService } from '../../services/customer.service';
-import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
-import { EditcustomerComponent } from '../editcustomer/editcustomer.component';
 import { finalize } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
+// project
+import { DeletePopupComponent } from './../../../../shared/components/delete-popup/delete-popup.component';
+import { EditcustomerComponent } from '../editcustomer/editcustomer.component';
+import { CustomerService } from '../../services/customer.service';
+import { Customer } from 'src/app/core/models/customer.model';
 
 @Component({
   selector: 'app-customer',
@@ -25,7 +27,6 @@ export class CustomerComponent implements OnInit {
   displayedColumns: string[] = [
     'sn',
     'fname',
-    // "lname",
     'mobile',
     'address',
     'registeDate',

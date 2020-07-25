@@ -1,13 +1,10 @@
+<!-- mortgage list -->
 <div class="content-wrapper">
   <!-- breadcrumb -->
   <ganapati-breadcrumb></ganapati-breadcrumb>
   <section fxLayout="row wrap" fxLayoutAlign="center center">
     <div id="mortgage-card">
-      <mat-card
-        fxFlex="500px"
-        fxFlex.xs="100%"
-        class="mortgagedetail-card mt-4 mb-4"
-      >
+      <mat-card class="mt-4 mb-4" style="width: 40rem;">
         <mat-card-title align="center">Mortgages information: </mat-card-title>
         <mat-card-subtitle *ngFor="let customer of customers" align="center"
           >Customer:
@@ -32,7 +29,6 @@
                   (delete)="onDelete(mortgage)"
                 ></ganapati-action-buttons>
               </h4>
-
 
               <h4
                 mat-line

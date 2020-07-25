@@ -3,134 +3,122 @@
   <!-- breadcrumb -->
   <ganapati-breadcrumb></ganapati-breadcrumb>
   <section fxLayout="row wrap" fxLayoutAlign="center center">
-    <mat-card
-      fxFlex="500px"
-      fxFlex.xs="100%"
-      class="mortgagedetail-card mt-4 mb-4"
-    >
-      <mat-card-title align="center"
-        >Mortgage details collection:
-      </mat-card-title>
-      <mat-card-subtitle *ngFor="let customer of customers" align="center"
-        >Customer:
-        <strong class="mt-2"
-          ><u style="color: rgb(65, 65, 156);"
-            >{{ customer.fname | titlecase }}
-            {{ customer.lname | titlecase }}</u
-          >
-        </strong></mat-card-subtitle
-      >
-      <mat-divider></mat-divider>
-      <mat-card-content>
-        <mat-list>
-          <h3 mat-subheader><u>Detials:</u></h3>
-          <mat-list-item>
-            <mat-icon mat-list-icon>details</mat-icon>
+    <div id="mortgageDetail-card">
+      <mat-card class="mortgagedetail-card mt-4 mb-4">
+        <mat-card-title align="center"
+          >Mortgage details collection:
+        </mat-card-title>
+        <mat-card-subtitle *ngFor="let customer of customers" align="center"
+          >Customer:
+          <strong class="mt-2"
+            ><u style="color: rgb(65, 65, 156);"
+              >{{ customer.fname | titlecase }}
+              {{ customer.lname | titlecase }}</u
+            >
+          </strong></mat-card-subtitle
+        >
+        <mat-divider></mat-divider>
+        <mat-card-content>
+          <mat-list>
+            <h3 mat-subheader><u>Detials:</u></h3>
+            <mat-list-item>
+              <mat-icon mat-list-icon>details</mat-icon>
 
-            <div *ngFor="let item of mortgages">
-              <h4 mat-line>Mortgage Id: {{ item.mortgageId }}</h4>
-              <h4 mat-line>Valuation: {{ item.amount }}</h4>
-              <h4 mat-line>Date: {{ item.engDate | date }}</h4>
-              <h4 mat-line>Interest: Rs. {{ interest }}</h4>
-              <h4 mat-line *ngIf="item.interestReceivedCollection[0] == null">
-                Interest Received: <strong>Not recieved interest yet.</strong>
-              </h4>
-              <h4 mat-line *ngIf="item.interestReceivedCollection[0] != null">
-                Interest Received: Rs.
-                {{ item.interestReceivedCollection[0].amount }}
-              </h4>
-            </div>
-          </mat-list-item>
-          <mat-divider></mat-divider>
-        </mat-list>
-      </mat-card-content>
-      <!-- <mat-card-actions>
-        <button mat-button (click)="goToList()">
-          <mat-icon aria-label="arrow back" color="primary"
-            >arrow_back</mat-icon
-          >
-        </button>
-      </mat-card-actions> -->
-    </mat-card>
+              <div *ngFor="let item of mortgages">
+                <h4 mat-line>Mortgage Id: {{ item.mortgageId }}</h4>
+                <h4 mat-line>Valuation: {{ item.amount }}</h4>
+                <h4 mat-line>Date: {{ item.engDate | date }}</h4>
+                <h4 mat-line>Interest: Rs. {{ interest }}</h4>
+                <h4 mat-line *ngIf="item.interestReceivedCollection[0] == null">
+                  Interest Received: <strong>Not recieved interest yet.</strong>
+                </h4>
+                <h4 mat-line *ngIf="item.interestReceivedCollection[0] != null">
+                  Interest Received: Rs.
+                  {{ item.interestReceivedCollection[0].amount }}
+                </h4>
+              </div>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </section>
 </div>
 
 <!-- test table -->
 <div class="content-wrapper">
-  <div
-    fxLayout
-    fxLayout.lt-md="column wrap"
-    fxLayoutAlign="center center"
-    fxLayoutGap.gt-sm="250px"
-    fxLayoutGap.lt.md="20px"
+  <ganapati-list-page-template
+    [heading]="'Interest information'"
+    [enableAdd]="false"
+    [enableSearch]="true"
+    [enableActiveLink]="false"
   >
-    <!-- search  -->
-  </div>
-  <div class="example-container mat-elevation-z8 table-responsive">
-    <!--<div class="spinner-container" *ngIf="customerListTableDataSource==''">
-    <mat-spinner></mat-spinner>
-  </div>-->
+    <div class="example-container mat-elevation-z8 table-responsive">
+      <table
+        mat-table
+        [dataSource]="mortgageDetails"
+        matSort
+        class="example-full-width mb-3"
+        hover="true"
+      >
+        <!-- S.N -->
+        <ng-container matColumnDef="sn">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>S.N</th>
+          <td mat-cell *matCellDef="let element; index as i">{{ i + 1 }}.</td>
+        </ng-container>
+        <!-- date -->
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.nepDate | date }}
+          </td>
+        </ng-container>
 
-    <table
-      mat-table
-      [dataSource]="mortgageDetails"
-      matSort
-      class="example-full-width mb-3"
-      hover="true"
-    >
-      <!-- S.N -->
-      <ng-container matColumnDef="sn">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>S.N</th>
-        <td mat-cell *matCellDef="let element; index as i">{{ i + 1 }}.</td>
-      </ng-container>
-      <!-- date -->
-      <ng-container matColumnDef="date">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
-        <td mat-cell *matCellDef="let element">{{ element.nepDate | date }}</td>
-      </ng-container>
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.status | titlecase }}
+          </td>
+        </ng-container>
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="days">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Days</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.day }}
+          </td>
+        </ng-container>
 
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.status | titlecase }}
-        </td>
-      </ng-container>
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="days">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Days</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.day }}
-        </td>
-      </ng-container>
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Amount</th>
+          <td mat-cell *matCellDef="let element">{{ element.amount }}</td>
+        </ng-container>
 
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="amount">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Amount</th>
-        <td mat-cell *matCellDef="let element">{{ element.amount }}</td>
-      </ng-container>
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef>Action</th>
+          <td mat-cell *matCellDef="let row; index as i">
+            <ganapati-action-buttons
+              [enableAdd]
+              [enableEdit]
+              [enableDelete]
+              (edit)="onEdit(row.mortDetId, row.amount, row.status)"
+              (add)="onAdd()"
+              (delete)="onDelete(row)"
+            ></ganapati-action-buttons>
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef>Action</th>
-        <td mat-cell *matCellDef="let row; index as i">
-          <ganapati-action-buttons
-            [enableAdd]
-            [enableEdit]
-            [enableDelete]
-            (edit)="onEdit(row.mortDetId, row.amount, row.status)"
-            (add)="onAdd()"
-            (delete)="onDelete(row)"
-          ></ganapati-action-buttons>
-        </td>
-      </ng-container>
+        <!-- Symbol Column -->
+        <tr
+          mat-header-row
+          *matHeaderRowDef="displayedColumns; sticky: true"
+        ></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
 
-      <!-- Symbol Column -->
-      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
-  </div>
-
-  <!-- <mat-paginator
+    <!-- <mat-paginator
     [length]="customerListTableDataSource.filteredData.length"
     [pageIndex]="0"
     [pageSize]="10"
@@ -138,4 +126,5 @@
     showFirstLastButtons
   >
   </mat-paginator> -->
+  </ganapati-list-page-template>
 </div>

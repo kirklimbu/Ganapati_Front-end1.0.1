@@ -1,18 +1,15 @@
-
-<ganapati-page-header
-    [enableActiveLink]="enableActiveLink"
-    [heading]="heading">
-  </ganapati-page-header>
+<ganapati-page-header [enableActiveLink]="enableActiveLink" [heading]="heading">
+</ganapati-page-header>
 
 <!-- page content -->
- <section class="p-4">
+<section>
   <ganapati-table-top-bar
-      [enableAdd]="enableAdd"
-      [enableSearch]="enableSearch"
-      (add)="onAdd()"
-      (search)="onSearch()"
-      >
-  </ganapati-table-top-bar> 
+    [enableAdd]="enableAdd"
+    [enableSearch]="enableSearch"
+    (add)="onAdd()"
+    (search)="onSearch()"
+  >
+  </ganapati-table-top-bar>
 
   <ng-content></ng-content>
 </section>

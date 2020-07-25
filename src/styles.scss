@@ -64,13 +64,16 @@ body {
   font-size: 1rem;
 }
 
-// test style
 .body-content {
   position: relative;
   background: #f0f0fa;
   -webkit-transition: padding 0.3s;
   transition: padding 0.3s;
   min-height: 100vh;
+}
+
+a:active {
+  color: red;
 }
 .horizontal-layout .body-content {
   padding-left: 0;
@@ -126,13 +129,40 @@ mat-sidenav {
   border-bottom: red;
   color: red;
 }
-
-#interestForm-card {
-  margin-left: 300px;
-  margin-right: 350px;
-  height: 350px;
-  width: 550px;
+#customerForm-card {
+  display: grid;
+  place-items: center;
 }
+#interestForm-card {
+  display: grid;
+  place-items: center;
+}
+#mortgage-card {
+  display: grid;
+  place-items: center;
+}
+#mortgageForm-card {
+  display: grid;
+  place-items: center;
+}
+
+#mortgageDetail-card {
+  display: grid;
+  place-items: center;
+}
+#mortgageDetailForm-card {
+  display: grid;
+  place-items: center;
+}
+#interestForm-card {
+  display: grid;
+  place-items: center;
+}
+/*
+mat-card {
+  display: grid;
+  place-items: center;
+} */
 
 /* Error 404 */
 .error-404 {

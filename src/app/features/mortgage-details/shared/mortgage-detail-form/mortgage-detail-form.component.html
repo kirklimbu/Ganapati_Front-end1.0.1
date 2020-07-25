@@ -3,129 +3,129 @@
   <!-- breadcrumb -->
   <ganapati-breadcrumb></ganapati-breadcrumb>
   <section fxLayout="row wrap" fxLayoutAlign="center center">
-    <mat-card
-      fxFlex="500px"
-      fxFlex.xs="100%"
-      class="mortgagedetail-form-card mt-4"
-    >
-      <mat-card-title align="center">Add mortgage Details </mat-card-title>
-      <mat-card-subtitle *ngFor="let customer of customers" align="center">
-        <strong align="center"
-          >Customer:
-          <u style="color: rgb(65, 65, 156);"
-            >{{ customer.fname | titlecase }}
-            {{ customer.lname | titlecase }}</u
-          >
-        </strong>
-      </mat-card-subtitle>
+    <div id="mortgageDetailForm-card">
+      <mat-card class="mt-4" style="width: 40rem;">
+        <mat-card-title align="center">Add mortgage Details </mat-card-title>
+        <mat-card-subtitle *ngFor="let customer of customers" align="center">
+          <strong align="center"
+            >Customer:
+            <u style="color: rgb(65, 65, 156);"
+              >{{ customer.fname | titlecase }}
+              {{ customer.lname | titlecase }}</u
+            >
+          </strong>
+        </mat-card-subtitle>
 
-      <mat-divider></mat-divider>
-      <form
-        [formGroup]="motrgageDetailForm"
-        autocomplete="off"
-        novalidate
-        fxLayout="column wrap"
-        fxLayoutAlign="center center"
-        fxLayoutGap="10px"
-      >
-        <!-- amount -->
-        <mat-card-content>
+        <mat-divider></mat-divider>
+        <form
+          [formGroup]="motrgageDetailForm"
+          autocomplete="off"
+          novalidate
+          fxLayout="column wrap"
+          fxLayoutAlign="center center"
+          fxLayoutGap="10px"
+        >
+          <!-- amount -->
+          <mat-card-content>
+            <div class="row">
+              <div class="col-md-6 col-sm-6 mx-auto mt-4">
+                <mat-form-field class="example-full-width">
+                  <input
+                    matInput
+                    type="number"
+                    placeholder="Amount"
+                    formControlName="amount"
+                    id="amount"
+                  />
+                  <mat-hint align="end"
+                    >Enter amount paid to customer.</mat-hint
+                  >
+                  <mat-error
+                    *ngIf="motrgageDetailForm.controls['amount'].invalid"
+                    >{{ getAmountErrorMessage() }}</mat-error
+                  >
+                </mat-form-field>
+              </div>
+            </div>
+
+            <!-- status -->
+            <div class="row">
+              <div class="col-md-6 col-sm-6 mx-auto">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Select staus</mat-label>
+                  <mat-select formControlName="status">
+                    <mat-option value="P">paid</mat-option>
+                    <mat-option value="R">recieved</mat-option>
+                  </mat-select>
+                  <mat-hint align="end"></mat-hint>
+                  <mat-error
+                    *ngIf="motrgageDetailForm.controls['status'].invalid"
+                    >{{ getStatusErrorMessage() }}</mat-error
+                  >
+                </mat-form-field>
+              </div>
+            </div>
+
+            <!-- rate of interest -->
+            <div class="row">
+              <div class="col-md-6 col-sm-6 mx-auto">
+                <mat-form-field class="example-full-width">
+                  <input
+                    matInput
+                    type="number"
+                    placeholder="Rate of interest"
+                    formControlName="rate"
+                    id="rate"
+                    required
+                  />
+                  <mat-hint align="end">Amount given to the client</mat-hint>
+                  <mat-error
+                    *ngIf="motrgageDetailForm.controls['rate'].invalid"
+                    >{{ getRateErrorMessage() }}</mat-error
+                  >
+                </mat-form-field>
+              </div>
+            </div>
+
+            <!-- date -->
+            <div class="row">
+              <div class="col-md-6 col-sm-6 mx-auto">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Date</mat-label>
+                  <input
+                    matInput
+                    [matDatepicker]="picker2"
+                    formControlName="nepDate"
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="picker2"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+                  <mat-hint align="end">Date of transaction.(B.S)</mat-hint>
+                  <mat-error
+                    *ngIf="motrgageDetailForm.controls['nepDate'].invalid"
+                    >{{ getNepaliDateErrorMessage() }}</mat-error
+                  >
+                </mat-form-field>
+              </div>
+            </div>
+          </mat-card-content>
+          <!-- <mat-divider></mat-divider> -->
+
+          <!-- save/cancel  -->
           <div class="row">
-            <div class="col-md-6 col-sm-6 mx-auto mt-4">
-              <mat-form-field class="example-full-width">
-                <input
-                  matInput
-                  type="number"
-                  placeholder="Amount"
-                  formControlName="amount"
-                  id="amount"
-                />
-                <mat-hint align="end">Enter amount paid to customer.</mat-hint>
-                <mat-error
-                  *ngIf="motrgageDetailForm.controls['amount'].invalid"
-                  >{{ getAmountErrorMessage() }}</mat-error
-                >
-              </mat-form-field>
+            <div class="col-md-9 col-sm-6">
+              <mat-card-actions align="center">
+                <ganapati-save-cancel-buttons
+                  (save)="createMortgageDetail(mortgageId, rate)"
+                  (cancel)="onCancel()"
+                ></ganapati-save-cancel-buttons>
+              </mat-card-actions>
             </div>
           </div>
-
-          <!-- status -->
-          <div class="row">
-            <div class="col-md-6 col-sm-6 mx-auto">
-              <mat-form-field class="example-full-width">
-                <mat-label>Select staus</mat-label>
-                <mat-select formControlName="status">
-                  <mat-option value="P">paid</mat-option>
-                  <mat-option value="R">recieved</mat-option>
-                </mat-select>
-                <mat-hint align="end"></mat-hint>
-                <mat-error
-                  *ngIf="motrgageDetailForm.controls['status'].invalid"
-                  >{{ getStatusErrorMessage() }}</mat-error
-                >
-              </mat-form-field>
-            </div>
-          </div>
-
-          <!-- rate of interest -->
-          <div class="row">
-            <div class="col-md-6 col-sm-6 mx-auto">
-              <mat-form-field class="example-full-width">
-                <input
-                  matInput
-                  type="number"
-                  placeholder="Rate of interest"
-                  formControlName="rate"
-                  id="rate"
-                  required
-                />
-                <mat-hint align="end">Amount given to the client</mat-hint>
-                <mat-error
-                *ngIf="motrgageDetailForm.controls['rate'].invalid"
-                >{{ getRateErrorMessage() }}</mat-error
-              >
-              </mat-form-field>
-            </div>
-          </div>
-
-          <!-- date -->
-          <div class="row">
-            <div class="col-md-6 col-sm-6 mx-auto">
-              <mat-form-field class="example-full-width">
-                <mat-label>Date</mat-label>
-                <input
-                  matInput
-                  [matDatepicker]="picker2"
-                  formControlName="nepDate"
-                />
-                <mat-datepicker-toggle
-                  matSuffix
-                  [for]="picker2"
-                ></mat-datepicker-toggle>
-                <mat-datepicker #picker2></mat-datepicker>
-                <mat-hint align="end">Date of transaction.(B.S)</mat-hint>
-                <mat-error
-                  *ngIf="motrgageDetailForm.controls['nepDate'].invalid"
-                  >{{ getNepaliDateErrorMessage() }}</mat-error
-                >
-              </mat-form-field>
-            </div>
-          </div>
-        </mat-card-content>
-        <!-- <mat-divider></mat-divider> -->
-
-        <!-- save/cancel  -->
-        <div class="row">
-          <div class="col-md-9 col-sm-6">
-            <mat-card-actions align="center">
-              <ganapati-save-cancel-buttons
-                (save)="createMortgageDetail(mortgageId, rate)"
-                (cancel)="onCancel()"
-              ></ganapati-save-cancel-buttons>
-            </mat-card-actions>
-          </div>
-        </div>
-      </form>
-    </mat-card>
+        </form>
+      </mat-card>
+    </div>
   </section>
 </div>
