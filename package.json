@@ -7,7 +7,10 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build:stats": "ng build --stats-json",
+    "analyze": "webpack-bundle-analyzer dist/ganapatiAngular/stats-es2015.json"
+
   },
   "private": true,
   "dependencies": {
@@ -32,6 +35,7 @@
     "ngx-toastr": "^13.0.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
+    "webpack-bundle-analyzer": "^3.8.0",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {

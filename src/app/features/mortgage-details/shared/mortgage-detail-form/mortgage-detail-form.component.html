@@ -30,10 +30,11 @@
             <div class="row">
               <div class="col-md-6 col-sm-6 mx-auto mt-4">
                 <mat-form-field class="example-full-width">
+                  <mat-label>Amount</mat-label>
                   <input
                     matInput
                     type="number"
-                    placeholder="Amount"
+                    placeholder="eg. 2500"
                     formControlName="amount"
                     id="amount"
                   />
@@ -70,10 +71,11 @@
             <div class="row">
               <div class="col-md-6 col-sm-6 mx-auto">
                 <mat-form-field class="example-full-width">
+                  <mat-label>Rate of interest</mat-label>
                   <input
                     matInput
                     type="number"
-                    placeholder="Rate of interest"
+                    placeholder="eg. 24"
                     formControlName="rate"
                     id="rate"
                     required
@@ -96,6 +98,7 @@
                     matInput
                     [matDatepicker]="picker2"
                     formControlName="nepDate"
+                    placeholder="2077/05/06"
                   />
                   <mat-datepicker-toggle
                     matSuffix

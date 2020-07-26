@@ -1,170 +1,141 @@
-<div class="content-wrapper">
-  <div id="mortgageEditForm-card">
-    <section fxLayout="row wrap" fxLayoutAlign="center center">
-      <!--<div>
-      <a
-        [routerLink]="['/createmortgagedetail']"
-        mat-stroked-button
-        color="primar"
-        class="mt-4"
-        >Add Mortgage Detail: <mat-icon align="center">add</mat-icon></a
-      >
-    </div>-->
-      <mat-card fxFlex="500px" fxFlex.xs="100%" class="mt-4">
-        <mat-card-title align="center">Edit mortgage </mat-card-title>
-        <mat-divider></mat-divider>
-        <form
-          [formGroup]="mortgageEditForm"
-          autocomplete="off"
-          novalidate
-          fxLayout="column wrap"
-          fxLayoutAlign="center center"
-          fxLayoutGap="10px"
-        >
-          <mat-card-content>
-            <!-- quantity -->
-            <div class="row">
-              <div class="col-md-6 col-sm-6 mx-auto">
-                <mat-form-field class="example-full-width mt-4 mb-4">
-                  <input
-                    matInput
-                    type="text"
-                    placeholder="Quantity"
-                    formControlName="qty"
-                    id="qty"
-                  />
-                  <mat-hint align="end"
-                    >Enter the quantity of item in grams(gm).</mat-hint
-                  >
-                  <mat-error *ngIf="mortgageEditForm.controls['qty'].invalid">{{
-                    getQuantityErrorMessage()
-                  }}</mat-error>
-                </mat-form-field>
-              </div>
-            </div>
-            <!-- reason -->
-            <div class="row">
-              <div class="col-md-6 col-sm-6 mx-auto mb-4">
-                <mat-form-field class="example-full-width">
-                  <input
-                    matInput
-                    type="text"
-                    placeholder="Reason"
-                    formControlName="reason"
-                    id="reason"
-                  />
-                  <mat-hint align="end">Enter the reason of deposit.</mat-hint>
-                  <mat-error
-                    *ngIf="mortgageEditForm.controls['reason'].invalid"
-                    >{{ getReasonErrorMessage() }}</mat-error
-                  >
-                </mat-form-field>
-              </div>
-            </div>
+<h2 mat-dialog-title align="center">Edit mortgage</h2>
+<mat-divider class="mb-3"></mat-divider>
+<mat-dialog-content class="mat-typography" style="max-height: 75vh;">
+  <form
+    [formGroup]="mortgageEditForm"
+    autocomplete="off"
+    novalidate
+    fxLayout="column wrap"
+    fxLayoutAlign="center center"
+    fxLayoutGap="10px"
+  >
+    <!-- quantity -->
+    <div class="row">
+      <div class="col-md-6 col-sm-6 mx-auto">
+        <mat-form-field class="example-full-width mt-4 mb-4">
+          <input
+            matInput
+            type="text"
+            placeholder="Quantity"
+            formControlName="qty"
+            id="qty"
+          />
+          <mat-hint align="end"
+            >Enter the quantity of item in grams(gm).</mat-hint
+          >
+          <mat-error *ngIf="mortgageEditForm.controls['qty'].invalid">{{
+            getQuantityErrorMessage()
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <!-- reason -->
+    <div class="row">
+      <div class="col-md-6 col-sm-6 mx-auto mb-4">
+        <mat-form-field class="example-full-width">
+          <input
+            matInput
+            type="text"
+            placeholder="Reason"
+            formControlName="reason"
+            id="reason"
+          />
+          <mat-hint align="end">Enter the reason of deposit.</mat-hint>
+          <mat-error *ngIf="mortgageEditForm.controls['reason'].invalid">{{
+            getReasonErrorMessage()
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
 
-            <!-- amount -->
+    <!-- amount -->
 
-            <div class="row">
-              <div class="col-md-6 col-sm-6 mx-auto mb-4">
-                <mat-form-field class="example-full-width">
-                  <input
-                    matInput
-                    type="number"
-                    placeholder="Amount"
-                    formControlName="amount"
-                    id="amount"
-                  />
-                  <mat-hint align="end">Amount given to the client.</mat-hint>
-                  <mat-error
-                    *ngIf="mortgageEditForm.controls['amount'].invalid"
-                    >{{ getAmountErrorMessage() }}</mat-error
-                  >
-                </mat-form-field>
-              </div>
-            </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-6 mx-auto mb-4">
+        <mat-form-field class="example-full-width">
+          <input
+            matInput
+            type="number"
+            placeholder="Amount"
+            formControlName="amount"
+            id="amount"
+          />
+          <mat-hint align="end">Amount given to the client.</mat-hint>
+          <mat-error *ngIf="mortgageEditForm.controls['amount'].invalid">{{
+            getAmountErrorMessage()
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
 
-            <!-- notificaton -->
-            <div class="row">
-              <div class="col-md-6 col-sm-6 mx-auto mb-4">
-                <mat-form-field class="example-full-width">
-                  <input
-                    matInput
-                    type="number"
-                    placeholder="Notifications"
-                    formControlName="notiSeen"
-                    id="notiSeen"
-                  />
-                  <mat-hint align="end"
-                    >Number of notifications send to the client.</mat-hint
-                  >
-                  <mat-error
-                    *ngIf="mortgageEditForm.controls['notiSeen'].invalid"
-                    >{{ getNotificationErrorMessage() }}</mat-error
-                  >
-                </mat-form-field>
-              </div>
-            </div>
+    <!-- notificaton -->
+    <div class="row">
+      <div class="col-md-6 col-sm-6 mx-auto mb-4">
+        <mat-form-field class="example-full-width">
+          <input
+            matInput
+            type="number"
+            placeholder="Notifications"
+            formControlName="notiSeen"
+            id="notiSeen"
+          />
+          <mat-hint align="end"
+            >Number of notifications send to the client.</mat-hint
+          >
+          <mat-error *ngIf="mortgageEditForm.controls['notiSeen'].invalid">{{
+            getNotificationErrorMessage()
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
 
-            <!-- fake mortgage id -->
-            <div class="row">
-              <div class="col-md-6 col-sm-6 mx-auto mb-4">
-                <mat-form-field class="example-full-width">
-                  <input
-                    matInput
-                    type="number"
-                    placeholder="Fake Mortgage_Id"
-                    formControlName="fakeMortId"
-                    id="fakeMortId"
-                  />
-                  <mat-hint align="end">Hand written bill number.</mat-hint>
-                  <mat-error
-                    *ngIf="mortgageEditForm.controls['fakeMortId'].invalid"
-                    >{{ getFakeMortIdrrorMessage() }}</mat-error
-                  >
-                </mat-form-field>
-              </div>
-            </div>
+    <!-- fake mortgage id -->
+    <div class="row">
+      <div class="col-md-6 col-sm-6 mx-auto mb-4">
+        <mat-form-field class="example-full-width">
+          <input
+            matInput
+            type="number"
+            placeholder="Fake Mortgage_Id"
+            formControlName="fakeMortId"
+            id="fakeMortId"
+          />
+          <mat-hint align="end">Hand written bill number.</mat-hint>
+          <mat-error *ngIf="mortgageEditForm.controls['fakeMortId'].invalid">{{
+            getFakeMortIdrrorMessage()
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
 
-            <!-- nepali date of transaction -->
-            <div class="row">
-              <div class="col-md-6 col-sm-6 mx-auto mb-4">
-                <mat-form-field class="example-full-width">
-                  <!--          <mat-label>Angular forms (w/ deserialization)</mat-label>-->
-                  <mat-label>Date</mat-label>
-                  <input
-                    matInput
-                    [matDatepicker]="picker2"
-                    formControlName="nepDate"
-                  />
-                  <mat-datepicker-toggle
-                    matSuffix
-                    [for]="picker2"
-                  ></mat-datepicker-toggle>
-                  <mat-datepicker #picker2></mat-datepicker>
-                  <mat-hint align="end">Date of transaction.</mat-hint>
-                  <mat-error
-                    *ngIf="mortgageEditForm.controls['nepDate'].invalid"
-                    >{{ getNepaliDateErrorMessage() }}</mat-error
-                  >
-                </mat-form-field>
-              </div>
-            </div>
-            <!-- <mat-divider></mat-divider> -->
-            <!-- save/cancel -->
-            <div class="row">
-              <div class="col-md-9 col-sm-6">
-                <mat-card-actions align="center">
-                  <ganapati-save-cancel-buttons
-                    (save)="onSave()"
-                    (cancel)="onCancel()"
-                  >
-                  </ganapati-save-cancel-buttons>
-                </mat-card-actions>
-              </div>
-            </div>
-          </mat-card-content>
-        </form>
-      </mat-card>
-    </section>
-  </div>
-</div>
+    <!-- nepali date of transaction -->
+    <div class="row">
+      <div class="col-md-6 col-sm-6 mx-auto mb-4">
+        <mat-form-field class="example-full-width">
+          <!--          <mat-label>Angular forms (w/ deserialization)</mat-label>-->
+          <mat-label>Date</mat-label>
+          <input matInput [matDatepicker]="picker2" formControlName="nepDate" />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker2"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+          <mat-hint align="end">Date of transaction.</mat-hint>
+          <mat-error *ngIf="mortgageEditForm.controls['nepDate'].invalid">{{
+            getNepaliDateErrorMessage()
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <!-- <mat-divider></mat-divider> -->
+    <!-- save/cancel -->
+    <div class="row">
+      <div class="col-md-9 col-sm-6">
+        <mat-card-actions align="center">
+          <ganapati-save-cancel-buttons (save)="onSave()" (cancel)="onCancel()">
+          </ganapati-save-cancel-buttons>
+        </mat-card-actions>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
