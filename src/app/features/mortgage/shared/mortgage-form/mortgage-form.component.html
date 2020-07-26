@@ -29,10 +29,11 @@
             <div class="row">
               <div class="col-md-6 col-sm-6 mx-auto mt-4">
                 <mat-form-field class="example-full-width">
+                  <mat-label>Quantity</mat-label>
                   <input
                     matInput
                     type="text"
-                    placeholder="Quantity"
+                    placeholder="eg: 12"
                     formControlName="qty"
                     id="qty"
                   />
@@ -49,10 +50,11 @@
             <div class="row">
               <div class="col-md-6 col-sm-6 mx-auto">
                 <mat-form-field class="example-full-width">
+                  <mat-label>Reason</mat-label>
                   <input
                     matInput
                     type="text"
-                    placeholder="Reason"
+                    placeholder="Pay salary to staff."
                     formControlName="reason"
                     id="reason"
                   />
@@ -69,10 +71,11 @@
             <div class="row">
               <div class="col-md-6 col-sm-6 mx-auto">
                 <mat-form-field class="example-full-width">
+                  <mat-label>Amount</mat-label>
                   <input
                     matInput
                     type="number"
-                    placeholder="Amount"
+                    placeholder="eg. 15000"
                     formControlName="amount"
                     id="amount"
                   />
@@ -88,10 +91,11 @@
             <div class="row">
               <div class="col-md-6 col-sm-6 mx-auto">
                 <mat-form-field class="example-full-width">
+                  <mat-label>Notification</mat-label>
                   <input
                     matInput
                     type="number"
-                    placeholder="Notifications"
+                    placeholder="5"
                     formControlName="notiSeen"
                     id="notiSeen"
                   />
@@ -110,10 +114,11 @@
             <div class="row">
               <div class="col-md-6 col-sm-6 mx-auto">
                 <mat-form-field class="example-full-width">
+                  <mat-label>Fake Mortgage_Id</mat-label>
                   <input
                     matInput
                     type="number"
-                    placeholder="Fake Mortgage_Id"
+                    placeholder="112"
                     formControlName="fakeMortId"
                     id="fakeMortId"
                   />
@@ -135,6 +140,7 @@
                     matInput
                     [matDatepicker]="picker2"
                     formControlName="nepDate"
+                    placeholder="2077/05/01"
                   />
                   <mat-datepicker-toggle
                     matSuffix

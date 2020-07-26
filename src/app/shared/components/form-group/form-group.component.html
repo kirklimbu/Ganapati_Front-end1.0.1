@@ -1,15 +1,13 @@
 <div class="form-group">
-    <label 
-        [for]="for"
-        class="font-weight-bold font-size-down-1 text-capitalize d-flex">
-        
-        {{label}}
-        
-      <i class="fas fa-asterisk text-danger font-size-down-5 mt-1" *ngIf="required"></i>
-        
-    </label>
-      <ng-content></ng-content>
-  
-      
-    </div>
-  
+  <mat-label
+    >
+
+    {{ label }}
+
+    <i
+      class="fas fa-asterisk text-danger font-size-down-5 mt-1"
+      *ngIf="required"
+    ></i>
+  </mat-label>
+  <ng-content></ng-content>
+</div>

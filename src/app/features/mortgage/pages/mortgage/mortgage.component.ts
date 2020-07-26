@@ -91,7 +91,7 @@ export class MortgageComponent implements OnInit {
       },
       // disableClose: true,
       width: '500px',
-      height: '600px',
+      height: '800px',
     });
 
     // after modal close
